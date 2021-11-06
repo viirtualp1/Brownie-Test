@@ -132,19 +132,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2527919427362808448, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
       propertyPath: m_Size.x
-      value: 1.1829405
+      value: 1.1379231
       objectReference: {fileID: 0}
     - target: {fileID: 2527919427362808448, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
       propertyPath: m_Size.y
-      value: 2.0819592
+      value: 2.119474
       objectReference: {fileID: 0}
     - target: {fileID: 2527919427362808448, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
       propertyPath: m_Offset.x
-      value: -1.5482178
+      value: 0.019890487
       objectReference: {fileID: 0}
     - target: {fileID: 2527919427362808448, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
       propertyPath: m_Offset.y
-      value: 0.6060307
+      value: 1.0599568
       objectReference: {fileID: 0}
     - target: {fileID: 4304876113860392109, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
       propertyPath: cam
@@ -156,11 +156,11 @@ PrefabInstance:
       objectReference: {fileID: 935005017}
     - target: {fileID: 4376886014609389398, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.54
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 4376886014609389398, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.15
+      value: 1.603
       objectReference: {fileID: 0}
     - target: {fileID: 8130725506076511441, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
       propertyPath: m_FlipX
@@ -172,11 +172,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9011999368583506726, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.24
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 9011999368583506726, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.58
+      value: -2.14
       objectReference: {fileID: 0}
     - target: {fileID: 9011999368583506726, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
       propertyPath: m_LocalPosition.z
@@ -464,7 +464,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -2.6998684, y: -0.049766064}
+  m_Offset: {x: -1.9985683, y: 0.5220633}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -475,7 +475,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.98591, y: 1.5447009}
+  m_Size: {x: 7.38851, y: 2.6883597}
   m_EdgeRadius: 0
 --- !u!1 &1466936267
 GameObject:
@@ -549,7 +549,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7946f2b79bb3a4d338e4df78230ffaad, type: 3}
-  m_Color: {r: 0.4716981, g: 0.46057314, b: 0.46057314, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -597,7 +597,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.03773582, g: 0.03773582, b: 0.03773582, a: 0}
+  m_BackGroundColor: {r: 0.07231222, g: 0.16621725, b: 0.23584908, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -656,8 +656,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 043c2c797ee5de9419b2e7a720bca462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0, g: 0, b: 0, a: 0}
-  alpha: 0
 --- !u!114 &1564348372
 MonoBehaviour:
   m_ObjectHideFlags: 0
