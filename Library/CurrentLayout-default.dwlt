@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 679, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 17
+  controlID: 41
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 18
+  controlID: 42
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -252,7 +252,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 19
+  controlID: 43
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -308,7 +308,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -33156
+  m_LastSelectedObjectID: 17206
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -408,22 +408,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets/Scenes
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts
+  - Assets/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\virtu\Brownie-Test
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 4e580000
-    m_LastClickedID: 22606
-    m_ExpandedIDs: 00000000de57000040580000525800002e64000026670000c06a0000f46e000000ca9a3b
+    m_SelectedIDs: 4e440000
+    m_LastClickedID: 17486
+    m_ExpandedIDs: 000000002c4400002e440000304400003244000034440000364400004644000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -451,7 +451,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 
+    m_ExpandedIDs: 000000002c4400002e44000030440000324400003444000036440000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -574,21 +574,21 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: d0dffeffd2e0feffd4e0feff5ae1feffcee3feff0ee6feff42e6feff9ee6feffe0e6feff68effeff7405ffffe00dffffb20fffffbc1cffffd81dffff4c1effff5220ffff9820ffffc220ffff4021ffff6021fffff621ffff0a22ffff1e22ffff9222ffffec22ffff2223ffff4824ffff6024fffff224ffff4625ffff5e25ffffc025ffff4c26ffff6426ffff7826ffff8426ffff6227ffffb427ffffea27ffff0028ffff3628ffff4c28ffff6628fffff628ffff2a29ffff062affff382affff622affff962affffd02affff442bffff762bffff8c2bffffee2bffff222cffff4c2cffff862cfffff22cffff1e2dffffd06effff7e7effff8682ffff9c8affffc48cfffff496ffff1e97ffffc897ffff8e99ffffc299ffffdca1ffff28a2ffff64a4ffffcca4ffff84a6ffffe8a7ffffdaabffff58acfffff8b2ffff30b6ffff50c2ffffe0c2ffff26c3ffff8ac3ffff0adfffff68e5ffffd8e5ffffe8f4fffffef4ffff60f5ffffa6f5ffffdaf5ffff3cf8ffff36faffff9e73000078770000568b0000489500008a98000020990000b2a40000faa4000004af000016b5000066b60000ccb60000ba020100000701000a07010028070100
+      m_ExpandedIDs: 466effff3a6fffff566fffff1470ffff1c70ffff3e70ffff6870ffff9270ffffc670ffffde70ffff5872ffff8872ffffc072ffff5a73ffff5877ffffce77ffffe479ffff0a7affff107bffff7c7bffffd27cffffe87cffff247dfffff87dffff567effff9c7effffe47effff287fffff3e7fffffa67fffff0686ffff0886ffff3e86ffff2ed3ffffeed3ffff24d4ffff54d4ffff76d4ffff0cd5ffffaed5ffff4ed6ffffb6d6ffff0ad7ffff70d7fffff8d7ffff0ed8ffff46d8ffffa0d8ffffd8d8ffff9cedffff8ef5ffffc6f5ffff12f6ffff48f6ffff98f6ffffe0f6ffff48fbffffe4510000e67c0000fa86000086880000988800008a8c0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: First
+        m_OriginalName: First
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 34554
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 4}
       m_SearchString: 
@@ -634,9 +634,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 2.0679228, y: -0.10410401, z: 53.61393}
+    m_Target: {x: -0.9945799, y: 0.047360763, z: -10.007301}
     speed: 2
-    m_Value: {x: 2.0679228, y: -0.10410401, z: 53.61393}
+    m_Value: {x: -0.9945799, y: 0.047360763, z: -10.007301}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -687,9 +687,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 6.3252687
+    m_Target: 12.124355
     speed: 2
-    m_Value: 6.3252687
+    m_Value: 12.124355
   m_Ortho:
     m_Target: 1
     speed: 2

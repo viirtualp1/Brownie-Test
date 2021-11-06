@@ -70,6 +70,8 @@ public class Hero : MonoBehaviour
     private Collider2D TV;
     private bool isTVOff = true;
 
+    public Camera cam;
+
     // Методы
     void Start()
     {
@@ -154,8 +156,8 @@ public class Hero : MonoBehaviour
 
         // TODO: camera fade out
         // if (isBadBooba && Input.GetKeyDown(KeyCode.X))
-        // {
-        //     GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFade>.Out();
+        // { 
+            // cam.GetComponent<CameraFade>.Out();
         // }
     }
 

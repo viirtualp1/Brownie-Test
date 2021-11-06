@@ -12,12 +12,18 @@ EditorBuildSettings:
     path: Assets/Scenes/HallwayLargeRoom.unity
     guid: 561023c53d7bd6c409ac19e94970194a
   - enabled: 1
+    path: Assets/Scenes/BedRoomScene.unity
+    guid: b8f63a783f92cdf489bd6307afe251fb
+  - enabled: 1
     path: Assets/Scenes/HomeBooba.unity
     guid: 6a9b565ecfe306d468a6dd2f2d91d963
   - enabled: 1
+    path: Assets/Scenes/LivingRoom.unity
+    guid: bb869efb3b7870141a5c551e8af42a76
+  - enabled: 1
+    path: Assets/Scenes/BathRoom.unity
+    guid: 0cae174deb64c0948b9e77beb174fb4e
+  - enabled: 1
     path: Assets/Scenes/Kitchen.unity
     guid: 47e6cbd1515648843bb1db5fe3163a74
-  - enabled: 1
-    path: Assets/Scenes/BedRoomScene.unity
-    guid: b8f63a783f92cdf489bd6307afe251fb
   m_configObjects: {}
