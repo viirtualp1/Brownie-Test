@@ -76,7 +76,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3, y: 3}
+  m_Size: {x: 30.000002, y: 30.000002}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -130,10 +130,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 199c11d2d71cb4d0198b307006f905c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
   speed: 3
   jumpForce: 15
+  sprite: {fileID: 0}
   helperText: {fileID: 0}
+  TVOnSprite: {fileID: 0}
+  TVOffSprite: {fileID: 0}
+  GetOrDupe: {fileID: 0}
 --- !u!50 &2967237791912391784
 Rigidbody2D:
   serializedVersion: 4
