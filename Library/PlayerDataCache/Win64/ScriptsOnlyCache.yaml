@@ -3,6 +3,7 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - CameraController
     - CameraFading.CameraFade
+    - CollectableScript
     - GoToDoor
     - Hero
     - MenuScript
@@ -100,6 +101,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 3258}
     - Class: 114
       Script: {instanceID: 3360}
+    - Class: 114
+      Script: {instanceID: 3606}
     - Class: 114
       Script: {instanceID: 5392}
     - Class: 115
@@ -953,4 +956,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/LivingRoom.unity
   - Assets/Scenes/BathRoom.unity
   - Assets/Scenes/Kitchen.unity
-  playerPath: C:/Users/virtu/Brownie-test-build/Brownie-Test.exe
+  playerPath: C:/Users/virtu/brownie-test-build/Brownie-Test.exe

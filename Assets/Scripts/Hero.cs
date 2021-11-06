@@ -70,11 +70,22 @@ public class Hero : MonoBehaviour
     private Collider2D TV;
     private bool isTVOff = true;
 
-    public Camera cam;
+    private bool isBoobaCanMove = true;
+    private bool isBoobaCanJump = true;
+
+    public GameObject GetOrDupe;
+
+    private GameObject card_duplicate;
+
+    private bool isChooseCardTakeOrDupe = false;
+
+    private GameObject card_original;
+
 
     // Методы
     void Start()
     {
+        GetOrDupe.GetComponent<Canvas>().enabled = false;
         items = new List<string>();
     }
 
@@ -91,12 +102,12 @@ public class Hero : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButton("Horizontal"))
+        if (isBoobaCanMove && Input.GetButton("Horizontal"))
             Run();
-        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+        if (isBoobaCanJump && isGrounded && Input.GetKeyDown(KeyCode.Space))
             Jump();
 
-        // Triiggered for sock
+        // Triggered for sock
         if (isTriggeredCollectable && isCollectable && Input.GetKeyDown(KeyCode.X))
         {
             string itemType = item.gameObject.GetComponent<CollectableScript>().itemType;
@@ -105,14 +116,52 @@ public class Hero : MonoBehaviour
             Destroy(item.gameObject);
         }
 
-        // Triiggered for carts
+        // Triggered for carts
         if (isCardTake && Input.GetKeyDown(KeyCode.X))
         {   
-            string cardType = cardTake.gameObject.GetComponent<CollectableScript>().itemType;
-            collectsCards = new List<string>();
-            collectsCards.Add(cardType);
+            Debug.Log("test?");
+            isCardTake = false;
+            isChooseCardTakeOrDupe = true;
 
-            Destroy(cardTake.gameObject);
+            card_original = cardTake.gameObject;
+            card_duplicate = GameObject.Instantiate(cardTake.gameObject);
+            card_duplicate.transform.localScale = new Vector3(0.2527358f, 0.2373716f, 1);
+            card_duplicate.transform.position = new Vector3(-3.45f, -3.37f, -2.29f);
+            card_duplicate.GetComponent<SpriteRenderer>().color = Color.white;
+            
+            isBoobaCanMove = false;
+            isBoobaCanJump = false;
+
+            GetOrDupe.GetComponent<Canvas>().enabled = true;
+        }
+
+        if (isChooseCardTakeOrDupe)
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                string cardType = cardTake.gameObject.GetComponent<CollectableScript>().itemType;
+                collectsCards = new List<string>();
+                collectsCards.Add(cardType);
+                
+                Destroy(card_original);
+                Destroy(card_duplicate);
+                isCardTake = false;
+
+                GetOrDupe.GetComponent<Canvas>().enabled = false;
+                isBoobaCanMove = true;
+                isBoobaCanJump = true;
+                isChooseCardTakeOrDupe = false;
+            } 
+            
+            if (Input.GetKeyDown(KeyCode.C)) 
+            {
+                GetOrDupe.GetComponent<Canvas>().enabled = false;
+                Destroy(card_duplicate);
+
+                isBoobaCanMove = true;
+                isBoobaCanJump = true;
+                isChooseCardTakeOrDupe = false;
+            }
         }
 
         // ask helper cactus (key press G) say about task1
