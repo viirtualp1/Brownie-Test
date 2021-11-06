@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class Hero : MonoBehaviour
 {
+    private Animator anim;
+
     public static List<string> items;
     public static List<string> collectsCards;
 
@@ -36,6 +38,8 @@ public class Hero : MonoBehaviour
 
     // Получаем коллайдер карточки (которую игрок хочет подобрать)
     private Collider2D cardTake;
+
+    private Collider2D stickyNote;
 
     // Получаем карточку, у которой нам надо сменить цвет
     private string card;
@@ -81,11 +85,27 @@ public class Hero : MonoBehaviour
 
     private GameObject card_original;
 
+    private bool isStickyNote;
+
+    private GameObject stickyNote_original;
+
+    private GameObject stickyNote_duplicate;
+
+    public GameObject training;
+
+    private bool isStickyNoteYes = false;
+
+    private States State
+    {
+        get { return (States)anim.GetInteger("state"); }
+        set { anim.SetInteger("state", (int)value); }
+    }
 
     // Методы
     void Start()
     {
         GetOrDupe.GetComponent<Canvas>().enabled = false;
+        training.GetComponent<Canvas>().enabled = false;
         items = new List<string>();
     }
 
@@ -93,6 +113,7 @@ public class Hero : MonoBehaviour
     {
         Instance = this;
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -102,6 +123,8 @@ public class Hero : MonoBehaviour
 
     private void Update()
     {
+        if (isGrounded) State = States.idle;
+
         if (isBoobaCanMove && Input.GetButton("Horizontal"))
             Run();
         if (isBoobaCanJump && isGrounded && Input.GetKeyDown(KeyCode.Space))
@@ -119,7 +142,6 @@ public class Hero : MonoBehaviour
         // Triggered for carts
         if (isCardTake && Input.GetKeyDown(KeyCode.X))
         {   
-            Debug.Log("test?");
             isCardTake = false;
             isChooseCardTakeOrDupe = true;
 
@@ -133,6 +155,35 @@ public class Hero : MonoBehaviour
             isBoobaCanJump = false;
 
             GetOrDupe.GetComponent<Canvas>().enabled = true;
+        }
+
+        if (!isStickyNoteYes && isStickyNote)
+        {
+            isStickyNote = false;
+            isStickyNoteYes = true;
+
+            stickyNote_original = stickyNote.gameObject;
+            stickyNote_duplicate = GameObject.Instantiate(stickyNote.gameObject);
+            stickyNote_duplicate.transform.localScale = new Vector3(1.387061f, 1.301505f, 1);
+            stickyNote_duplicate.transform.position = new Vector3(-11.49f, -4.54f, 112.7f);
+            stickyNote_duplicate.GetComponent<SpriteRenderer>().color = Color.white;
+
+            isBoobaCanMove = false;
+            isBoobaCanJump = false;
+
+            training.GetComponent<Canvas>().enabled = true;
+        }
+
+        if (isStickyNote && Input.GetKeyDown(KeyCode.C))
+        {
+            training.GetComponent<Canvas>().enabled = false;
+            Destroy(stickyNote_duplicate);
+            Destroy(stickyNote_original);
+
+            isBoobaCanMove = true;
+            isBoobaCanJump = true;
+            isStickyNote = false;
+            isStickyNoteYes = false;
         }
 
         if (isChooseCardTakeOrDupe)
@@ -215,10 +266,10 @@ public class Hero : MonoBehaviour
 
     private void Run()
     {
+        if (isGrounded) State = States.run;
+
         Vector3 dir = transform.right * Input.GetAxis("Horizontal");
-
         transform.position = Vector3.MoveTowards(transform.position, transform.position + dir, speed * Time.deltaTime);
-
         sprite.flipX = dir.x < 0.0f;
     }
 
@@ -231,6 +282,8 @@ public class Hero : MonoBehaviour
     {
         Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, 0.3f);
         isGrounded = collider.Length > 1;
+
+        if (!isGrounded) State = States.jump;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -252,11 +305,13 @@ public class Hero : MonoBehaviour
 
         if (collision.CompareTag("homeBooba")) { isDoorBooba = true; }
 
-        if (collision.CompareTag("card")) { isCardTake = true; cardTake = collision; }
+        if (collision.CompareTag("card")) { State = States.loot; isCardTake = true; cardTake = collision; }
 
         if (collision.CompareTag("badBooba")) { isBadBooba = true; }
 
         if (collision.CompareTag("RCB")) { TV = collision; isRCB = true; }
+
+        if (collision.CompareTag("training")) { isStickyNote = true; stickyNote = collision; }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -272,5 +327,16 @@ public class Hero : MonoBehaviour
         cardTake = null;
         isRCB = false;
         TV = null;
+        isBoobaCanMove = true;
+        isBoobaCanJump = true;
     }
+}
+
+public enum States
+{
+    idle,
+    run,
+    jump,
+    loot,
+    craft
 }

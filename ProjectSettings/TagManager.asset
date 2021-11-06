@@ -12,6 +12,7 @@ TagManager:
   - card
   - RCB
   - TVOff
+  - training
   layers:
   - Default
   - TransparentFX
