@@ -13,6 +13,10 @@ TagManager:
   - RCB
   - TVOff
   - training
+  - wires
+  - mining
+  - instruments
+  - light
   layers:
   - Default
   - TransparentFX
