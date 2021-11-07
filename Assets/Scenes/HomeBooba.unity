@@ -14631,9 +14631,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1564348369}
     - target: {fileID: 4304876113860392109, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
+      propertyPath: bedNew
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4304876113860392109, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
       propertyPath: sprite
       value: 
       objectReference: {fileID: 935005017}
+    - target: {fileID: 4304876113860392109, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
+      propertyPath: badWithBooba
+      value: 
+      objectReference: {fileID: 21300000, guid: 5cc491ec74355e54d96fd7b0f52f22d4, type: 3}
+    - target: {fileID: 4304876113860392109, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
+      propertyPath: badWithNoBooba
+      value: 
+      objectReference: {fileID: 21300000, guid: fab0effe0b72e2a46996a1d226e36b2c, type: 3}
     - target: {fileID: 4376886014609389398, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.01
@@ -14697,6 +14709,10 @@ PrefabInstance:
     - target: {fileID: 9011999369659950241, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
       propertyPath: m_FlipY
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9011999369659950241, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9011999369659950254, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
       propertyPath: m_Name

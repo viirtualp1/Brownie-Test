@@ -167,6 +167,10 @@ public class Hero : MonoBehaviour
 
     private bool isPlush;
 
+    private bool isBoobaSleep;
+
+    public Sprite badWithNoBooba;
+
     private States State
     {
         get { return (States)anim.GetInteger("state"); }
@@ -414,17 +418,8 @@ public class Hero : MonoBehaviour
 
         // Буба ложится спать на свою кровать
         if (isBadBooba && Input.GetKeyDown(KeyCode.X))
-        { 
             newDay();
 
-            GameObject bad = GameObject.FindGameObjectWithTag("badBooba");
-            GameObject cam = GameObject.FindGameObjectWithTag("MainCamera");
-
-            // bad.GetComponentInChildren<SpriteRenderer>().sprite = badWithBooba;
-            bad.GetComponentInChildren<SpriteRenderer>().color = new Color(147/255f, 147/255f, 147/255f);
-            bad.GetComponentInChildren<SpriteRenderer>().sprite = badWithBooba;
-            cam.GetComponent<Camera>().backgroundColor = new Color(46/255f, 46/255f, 46/255f);
-        }
 
         // Триггеры в гараже
         if (wireCounter < 4 && isWire && Input.GetKeyDown(KeyCode.X))
