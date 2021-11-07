@@ -109,7 +109,7 @@ public class Hero : MonoBehaviour
 
     private int wireCounter = 0;
     
-    private string currentTaskString;
+    private string currentTaskString = "Гостиная";
 
     // Касается ли игрок инструментов
     private bool isInstruments = false;
@@ -127,6 +127,46 @@ public class Hero : MonoBehaviour
     private bool isLightTrigger = false;
     public Sprite newLight;
 
+    public Sprite bedNew;
+    private bool isBed;
+
+    private bool isBaika = false;
+
+    public Sprite newStend;
+    public Sprite newImages;
+    public Sprite newWheel;
+    private bool isStend = false;
+    private bool isImages = false;
+    private bool isWheel = false;
+
+    private bool isSleeve;
+    private bool isPuddle;
+
+    private bool isFishing;
+
+    private bool isEgg;
+    private bool isMatches;
+    private bool isSink;
+    private bool isMatchesComplete = false;
+    private bool isEggComplete = false;
+
+    private bool isFertilizer;
+    private bool isDichlorvos;
+    private bool isScissors;
+    private bool isWateringCan;
+    private bool isFlowers;
+
+    public Sprite newSink;
+    public Sprite newPlush;
+    public Sprite newFlowers;
+
+    private bool isTakeFertilizer;
+    private bool isTakeDichlorvos;
+    private bool isTakeScissors;
+    private bool isTakeWateringCan;
+
+    private bool isPlush;
+
     private States State
     {
         get { return (States)anim.GetInteger("state"); }
@@ -137,14 +177,17 @@ public class Hero : MonoBehaviour
     void Start()
     {
         getSaves();
+        if (day == 2) {
+            currentTaskString = "Гараж";
+        }
 
         if (SceneManager.GetActiveScene().name == "HomeBooba")
         {
             for (int i = 0; i < collectsCards.Count; i++)
             {
-                for (int j = 1; j < 11; j++)
+                for (int j = 0; j < 10; j++)
                 {
-                    cardObject = GameObject.Find("card" + j);
+                    cardObject = GameObject.Find("card1 (" + j + ")");
                     cardObject.GetComponent<SpriteRenderer>().color = Color.white;
                 }
             }
@@ -156,20 +199,40 @@ public class Hero : MonoBehaviour
                 Destroy(GameObject.Find(collectsCards[i]));
         }
 
-        if (day >= 3)
-            cactus.GetComponent<SpriteRenderer>().sprite = cactus_new;
-        if (day > 1)
-            Destroy(stickyNote_o);
-        if (day < 2)
-            GameObject.Find("stairsToLivingRoom").GetComponent<BoxCollider2D>().enabled = false;
-        if (day < 3)
-            GameObject.Find("DoorToGarage").GetComponent<BoxCollider2D>().enabled = false;
-        if (day < 4)
-            GameObject.Find("DoorToBathRoom").GetComponent<BoxCollider2D>().enabled = false;
-        if (day < 5)
-            GameObject.Find("DoorToKitchen").GetComponent<BoxCollider2D>().enabled = false;
-        if (day < 6)
-            GameObject.Find("DoorToRoof").GetComponent<BoxCollider2D>().enabled = false;
+        try {
+            if (day >= 3)
+                cactus.GetComponent<SpriteRenderer>().sprite = cactus_new;
+        } catch { }
+
+        try {
+            if (day > 1)
+                Destroy(stickyNote_o);
+        } catch { }
+
+        try {
+            if (day < 2)
+                GameObject.Find("stairsToLivingRoom").GetComponent<BoxCollider2D>().enabled = false;
+        } catch { }
+
+        try {
+            if (day < 3)
+                GameObject.Find("DoorToGarage").GetComponent<BoxCollider2D>().enabled = false;
+        } catch { }
+
+        try {
+            if (day < 4)
+                GameObject.Find("DoorToBathRoom").GetComponent<BoxCollider2D>().enabled = false;
+        } catch { }
+
+        try {
+            if (day < 5)
+                GameObject.Find("DoorToKitchen").GetComponent<BoxCollider2D>().enabled = false;
+        } catch { }
+
+        try {
+            if (day < 6)
+                GameObject.Find("DoorToRoof").GetComponent<BoxCollider2D>().enabled = false;
+        } catch { }
 
         currentTask();
 
@@ -190,6 +253,8 @@ public class Hero : MonoBehaviour
             currentTaskString = "Кухня";
         else if (day == 6)
             currentTaskString = "Крыша";
+        else if (day == 7)
+            currentTaskString = "Конец";
     }
 
     private void Awake()
@@ -357,6 +422,7 @@ public class Hero : MonoBehaviour
 
             // bad.GetComponentInChildren<SpriteRenderer>().sprite = badWithBooba;
             bad.GetComponentInChildren<SpriteRenderer>().color = new Color(147/255f, 147/255f, 147/255f);
+            bad.GetComponentInChildren<SpriteRenderer>().sprite = badWithBooba;
             cam.GetComponent<Camera>().backgroundColor = new Color(46/255f, 46/255f, 46/255f);
         }
 
@@ -390,6 +456,163 @@ public class Hero : MonoBehaviour
             Destroy(miningObj);
 
             currentTaskString = "Ванная";
+            PlayerPrefs.SetString("currentTaskString", currentTaskString);
+        }
+
+        if (isBed && Input.GetKeyDown(KeyCode.X))
+        {
+            GameObject bedNow = GameObject.Find("Bed");
+            bedNow.GetComponent<SpriteRenderer>().sprite = bedNew;
+        }
+
+        if (isBaika && Input.GetKeyDown(KeyCode.X))
+        {
+            GameObject baika = GameObject.Find("baika");
+            items.Add("baika");
+            saveItems();
+            Destroy(baika);
+        }
+
+        if (isStend && Input.GetKeyDown(KeyCode.X))
+        {
+            GameObject stend = GameObject.Find("stend1");
+            stend.GetComponent<SpriteRenderer>().sprite = newStend;
+            
+            items.Add("stend1");
+            saveItems();
+        }
+
+        if (isImages && Input.GetKeyDown(KeyCode.X))
+        {
+            GameObject images = GameObject.Find("img1");
+            images.GetComponent<SpriteRenderer>().sprite = newImages;
+        
+            items.Add("img1");
+            saveItems();
+        }
+
+        if (isWheel && Input.GetKeyDown(KeyCode.X))
+        {
+            GameObject wheel = GameObject.Find("wheel");
+            wheel.GetComponent<SpriteRenderer>().sprite = newWheel;
+        
+            items.Add("wheel");
+            saveItems();
+
+            currentTaskString = "Гараж";
+            PlayerPrefs.SetString("currentTaskString", currentTaskString);
+        }
+    
+        if (isPuddle && Input.GetKeyDown(KeyCode.X))
+        {
+            GameObject puddle = GameObject.Find("puddle");
+            Destroy(puddle);
+            
+            items.Add("puddle");
+            saveItems();
+        }
+
+        if (isSleeve && Input.GetKeyDown(KeyCode.X))
+        {
+            GameObject sleeve = GameObject.Find("sleeve");
+            Destroy(sleeve);
+
+            items.Add("sleeve");
+            saveItems();
+        }
+
+        if (isFishing && Input.GetKeyDown(KeyCode.X))
+        {
+            GameObject ud = GameObject.Find("ud");
+            ud.GetComponent<SpriteRenderer>().enabled = true;
+            
+            currentTaskString = "Кухня";
+            PlayerPrefs.SetString("currentTaskString", currentTaskString);
+        }
+
+        if (isEgg && Input.GetKeyDown(KeyCode.X))
+        {
+            GameObject egg = GameObject.Find("egg");
+            Destroy(egg);
+
+            isEggComplete = true;
+        }
+
+        if (isMatches && Input.GetKeyDown(KeyCode.X))
+        {
+            GameObject mat = GameObject.Find("matches");
+            Destroy(mat);
+
+            isMatchesComplete = true;
+        }
+
+        if (isMatchesComplete && isEggComplete && isSink && Input.GetKeyDown(KeyCode.X))
+        {
+            GameObject sink = GameObject.Find("sink");
+            sink.GetComponent<SpriteRenderer>().sprite = newSink;
+
+            currentTaskString = "Крыша";
+            PlayerPrefs.SetString("currentTaskString", currentTaskString);
+        }
+
+        if (isFertilizer && Input.GetKeyDown(KeyCode.X))
+        {
+            GameObject fertilizer = GameObject.Find("fertilizer");
+            Destroy(fertilizer);
+            
+            items.Add("fertilizer");
+            saveItems();
+
+            isTakeFertilizer = true;
+        }
+
+        if (isDichlorvos && Input.GetKeyDown(KeyCode.X))
+        {
+            GameObject dichlorvos = GameObject.Find("dichlorvos");
+            Destroy(dichlorvos);
+
+            items.Add("dichlorvos");
+            saveItems();
+
+            isTakeDichlorvos = true;
+        }
+
+        if (isScissors && Input.GetKeyDown(KeyCode.X))
+        {
+            GameObject scissors = GameObject.Find("scissors");
+            Destroy(scissors);
+
+            items.Add("scissors");
+            saveItems();
+
+            isTakeScissors = true;
+        }
+
+        if (isWateringCan && Input.GetKeyDown(KeyCode.X))
+        {
+            GameObject watering_can = GameObject.Find("watering_can");
+            Destroy(watering_can);
+
+            items.Add("watering_can");
+            saveItems();
+            
+            isTakeWateringCan = true;
+        }
+
+        if (isTakeWateringCan && isTakeScissors && isTakeDichlorvos && isTakeFertilizer && isPlush && Input.GetKeyDown(KeyCode.X))
+        {  
+            GameObject plush = GameObject.Find("plush");
+            plush.GetComponent<SpriteRenderer>().sprite = newPlush;
+
+            currentTaskString = "Конец";
+            PlayerPrefs.SetString("currentTaskString", currentTaskString);
+        } else if (isTakeWateringCan && isTakeScissors && isTakeDichlorvos && isTakeFertilizer && isFlowers && Input.GetKeyDown(KeyCode.X))
+        {
+            GameObject flowers = GameObject.Find("flowers");
+            flowers.GetComponent<SpriteRenderer>().sprite = newFlowers;
+
+            currentTaskString = "Конец";
+            PlayerPrefs.SetString("currentTaskString", currentTaskString);
         }
     }
 
@@ -500,6 +723,29 @@ public class Hero : MonoBehaviour
         if (collision.CompareTag("mining")) { isMining = true; mining = collision; }
 
         if (collision.CompareTag("light")) { isLightTrigger = true; light = collision; }
+
+        if (collision.CompareTag("bed")) { isBed = true; }
+
+        if (collision.CompareTag("baika")) { isBaika = true; }
+
+        if (collision.CompareTag("images")) { isImages = true; }
+        if (collision.CompareTag("stend")) { isStend = true; }
+
+        if (collision.CompareTag("puddle")) { isPuddle = true; }
+        if (collision.CompareTag("sleeve")) { isSleeve = true; }
+        if (collision.CompareTag("fishing_rod")) { isFishing = true; }
+        
+        if (collision.CompareTag("matches")) { isMatches = true; }
+        if (collision.CompareTag("sink")) { isSink = true; }
+        if (collision.CompareTag("egg")) { isEgg = true; }
+
+        if (collision.CompareTag("fertilizer")) { isFertilizer = true; }
+        if (collision.CompareTag("dichlorvos")) { isDichlorvos = true; }
+        if (collision.CompareTag("scissors")) { isScissors = true; }
+        if (collision.CompareTag("watering_can")) { isWateringCan = true; }
+
+        if (collision.CompareTag("flowers")) { isFlowers = true; }
+        if (collision.CompareTag("plush")) { isPlush = true; }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -523,6 +769,14 @@ public class Hero : MonoBehaviour
         isMining = false;
         mining = null;
         isLightOff = false;
+        isMatches = false;
+        isSink = false;
+        isEgg = false;
+        isFlowers = false;
+        isPlush = false;
+        isDichlorvos = false;
+        isScissors = false;
+        isWateringCan = false;
     }
 }
 
