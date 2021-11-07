@@ -13,6 +13,27 @@ TagManager:
   - RCB
   - TVOff
   - training
+  - wires
+  - mining
+  - instruments
+  - light
+  - bed
+  - baika
+  - stend
+  - images
+  - wheel
+  - puddle
+  - sleeve
+  - fishing_rod
+  - egg
+  - matches
+  - sink
+  - fertilizer
+  - dichlorvos
+  - scissors
+  - watering_can
+  - plush
+  - flowers
   layers:
   - Default
   - TransparentFX

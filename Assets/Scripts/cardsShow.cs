@@ -7,22 +7,22 @@ public class cardsShow : MonoBehaviour
     public Rigidbody2D hero;
     private GameObject card;
     private List<string> cards;
-
-    private void Awake()
-    {
-        cards = Hero.collectsCards;
-    }
+    private GameObject cardObject;
 
     private void Start()
     {
-        Debug.Log(cards.Count);
+        // cards = Hero.collectsCards;
+        
+        // for (int i = 0; i < cards.Count; i++)
+        // {
+        //     Debug.Log(cards.Count);
 
-        for (int i = 0; i < cards.Count; i++)
-        {
-            card = GameObject.Find(cards[i]);
-            Debug.Log(card);
-
-            card.GetComponent<SpriteRenderer>().color = Color.white;
-        }
+        //     for (int j = 0; j < 10; j++)
+        //     {
+        //         Debug.Log("card"+j);
+        //         cardObject = GameObject.Find("card" + j);
+        //         cardObject.GetComponent<SpriteRenderer>().color = Color.white;
+        //     }
+        // }
     }
 }

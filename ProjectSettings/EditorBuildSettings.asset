@@ -9,11 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 281edb1d2a3bbe846982f40dcbab234f
   - enabled: 1
-    path: Assets/Scenes/HallwayLargeRoom.unity
-    guid: 561023c53d7bd6c409ac19e94970194a
-  - enabled: 1
     path: Assets/Scenes/BedRoomScene.unity
     guid: b8f63a783f92cdf489bd6307afe251fb
+  - enabled: 1
+    path: Assets/Scenes/HallwayLargeRoom.unity
+    guid: 561023c53d7bd6c409ac19e94970194a
   - enabled: 1
     path: Assets/Scenes/HomeBooba.unity
     guid: 6a9b565ecfe306d468a6dd2f2d91d963

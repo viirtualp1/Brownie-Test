@@ -1,9 +1,5 @@
 sceneSetups:
-<<<<<<< Updated upstream
-- path: Assets/Scenes/HallwayLargeRoom.unity
-=======
-- path: Assets/Scenes/Garage.unity
->>>>>>> Stashed changes
+- path: Assets/Scenes/roofScene.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
