@@ -346,6 +346,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 926352150}
     - target: {fileID: 4304876113860392109, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
+      propertyPath: sound1_4
+      value: 
+      objectReference: {fileID: 221254275}
+    - target: {fileID: 4304876113860392109, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
+      propertyPath: sound1_5
+      value: 
+      objectReference: {fileID: 736129899}
+    - target: {fileID: 4304876113860392109, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
+      propertyPath: sound1_8
+      value: 
+      objectReference: {fileID: 123456349}
+    - target: {fileID: 4304876113860392109, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
       propertyPath: training
       value: 
       objectReference: {fileID: 2139559443}
@@ -774,6 +786,11 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 12, y: 12}
   m_EdgeRadius: 0
+--- !u!82 &123456349 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4424219729462419746, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
+  m_PrefabInstance: {fileID: 77885271}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &158259290
 GameObject:
   m_ObjectHideFlags: 0
@@ -1117,6 +1134,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 559048551}
+--- !u!82 &221254275 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8178023970663508145, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
+  m_PrefabInstance: {fileID: 77885271}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &265187920
 GameObject:
   m_ObjectHideFlags: 0
@@ -2322,6 +2344,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!82 &736129899 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3725423081347096439, guid: db3701ab7beec3740a35a3684b1c3426, type: 3}
+  m_PrefabInstance: {fileID: 77885271}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &765398062
 GameObject:
   m_ObjectHideFlags: 0

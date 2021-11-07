@@ -31,6 +31,12 @@ public class Hero : MonoBehaviour
     // Получаем текст кактуса
     public TMP_Text helperText;
 
+    // Audio for Buba
+    public AudioSource sound1_5;
+    public AudioSource sound1_4;
+
+    public  AudioSource sound1_8;
+
     // Триггер
     private bool isTriggeredCollectable = false;
 
@@ -313,9 +319,14 @@ public class Hero : MonoBehaviour
 
         // Вход в N комнату
         if (isDoor && Input.GetKeyDown(KeyCode.X))
-        {
+        {   
             string nextRoom = room.gameObject.GetComponent<GoToDoor>().nextRoom;
             SceneManager.LoadScene(nextRoom);
+
+            if (nextRoom == "HallwayLargeRoom")
+            {
+                sound1_8.Play();
+            }
         }
 
         // Выход в меню
@@ -491,7 +502,21 @@ public class Hero : MonoBehaviour
 
         if (collision.CompareTag("RCB")) { TV = collision; isRCB = true; }
 
-        if (collision.CompareTag("training")) { isStickyNote = true; stickyNote = collision; }
+        if (collision.CompareTag("training"))
+        {   
+            if (day == 0)
+            {
+                sound1_5.Play();
+            }
+
+            isStickyNote = true; 
+            stickyNote = collision;
+
+            if (day == 0)
+            {
+                sound1_4.PlayDelayed(2.5f);
+            }
+        }
         
         if (collision.CompareTag("wires")) { isWire = true; wire = collision; }
 
