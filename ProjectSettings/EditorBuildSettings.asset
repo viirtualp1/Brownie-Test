@@ -26,4 +26,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Kitchen.unity
     guid: 47e6cbd1515648843bb1db5fe3163a74
+  - enabled: 1
+    path: Assets/Scenes/Garage.unity
+    guid: abc64822471674efc81651e9270a1084
+  - enabled: 1
+    path: Assets/Scenes/roofScene.unity
+    guid: d58074749d3fe9343883c4c629731296
   m_configObjects: {}
