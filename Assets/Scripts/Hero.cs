@@ -68,6 +68,25 @@ public class Hero : MonoBehaviour
 
     private float time = 2f;
 
+	// Переменные для музыки
+	public AudioSource dayloop1;
+	public AudioSource dayloop2;
+	public AudioSource dayloop3;
+	public AudioSource dayloop4;
+	public AudioSource dayloop5;
+	public AudioSource dayloop6;
+	public AudioSource dayclockloop1;
+	public AudioSource dayclockloop2;
+	public AudioSource dayclockloop3;
+	public AudioSource dayclockloop4;
+	public AudioSource dayclockloop5;
+	public AudioSource dayclockloop6;
+	public AudioSource chill;
+	public AudioSource intromenu;
+	public AudioSource menu;
+	public AudioSource titles;
+	
+
     public static int day = 1;
     
     public Sprite TVOnSprite;
@@ -233,6 +252,44 @@ public class Hero : MonoBehaviour
             if (day < 6)
                 GameObject.Find("DoorToRoof").GetComponent<BoxCollider2D>().enabled = false;
         } catch { }
+		
+		
+		if (day ==1)
+			{
+				dayloop1.Play();
+			}
+			
+		if (day ==2)
+			{
+				dayloop2.Play();
+				dayloop1.Stop();
+			}
+			
+		if (day ==3)
+			{
+				dayloop3.Play();
+				dayloop2.Stop();
+			}
+			
+		if (day ==4)
+			{
+				dayloop4.Play();
+				dayloop3.Stop();
+			}
+			
+		if (day ==5)
+			{
+				dayloop5.Play();
+				dayloop4.Stop();
+			}
+			
+		if (day ==6)
+			{
+				dayloop6.Play();
+				dayloop5.Stop();
+			}
+			
+				
 
         currentTask();
 
