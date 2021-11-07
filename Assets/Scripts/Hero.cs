@@ -525,6 +525,7 @@ public class Hero : MonoBehaviour
         if (collision.CompareTag("mining")) { isMining = true; mining = collision; }
 
         if (collision.CompareTag("light")) { isLightTrigger = true; light = collision; }
+	
     }
 
     private void OnTriggerExit2D(Collider2D collision)

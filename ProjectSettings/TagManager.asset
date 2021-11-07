@@ -17,6 +17,7 @@ TagManager:
   - mining
   - instruments
   - light
+  - firstdown
   layers:
   - Default
   - TransparentFX
