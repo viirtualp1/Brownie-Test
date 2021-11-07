@@ -8,8 +8,12 @@ public class Hero : MonoBehaviour
 {
     private Animator anim;
 
+    // Лист собранных предметов (!добавлять id предметов, чтобы потом было их легко удалить!)
     public static List<string> items;
     public static List<string> collectsCards;
+    
+    // Нужные предметы для игры
+    public static List<string> neededItems;
 
     // Приватные поля
     [SerializeField] private float speed = 3f; // Скорость движения
@@ -64,9 +68,6 @@ public class Hero : MonoBehaviour
 
     private float time = 2f;
 
-    string[] tasks = { "Собрать носки", "Вынести мусор" };
-    private int counterTask1 = 0;
-
     private int day = 1;
     public Sprite TVOnSprite;
     public Sprite TVOffSprite;
@@ -78,22 +79,25 @@ public class Hero : MonoBehaviour
     private bool isBoobaCanJump = true;
 
     public GameObject GetOrDupe;
-
     private GameObject card_duplicate;
-
     private bool isChooseCardTakeOrDupe = false;
-
     private GameObject card_original;
 
     private bool isStickyNote;
-
     private GameObject stickyNote_original;
-
     private GameObject stickyNote_duplicate;
 
+    // Текст обучения
     public GameObject training;
 
+    // Открыт ли стикер
     private bool isStickyNoteYes = false;
+
+    // Sprite bad with sleep Booba
+    public Sprite badWithBooba;
+
+    private int collectsCardsCount;
+    private int itemsCount;
 
     private States State
     {
@@ -104,6 +108,7 @@ public class Hero : MonoBehaviour
     // Методы
     void Start()
     {
+        getSaves();
         GetOrDupe.GetComponent<Canvas>().enabled = false;
         training.GetComponent<Canvas>().enabled = false;
         items = new List<string>();
@@ -254,15 +259,66 @@ public class Hero : MonoBehaviour
             isTVOff = true;
         }
 
-        // TODO: camera fade out
-        // if (isBadBooba && Input.GetKeyDown(KeyCode.X))
-        // { 
-            // cam.GetComponent<CameraFade>.Out();
-        // }
+        if (isBadBooba && Input.GetKeyDown(KeyCode.X))
+        { 
+            GameObject bad = GameObject.FindGameObjectWithTag("badBooba");
+            GameObject cam = GameObject.FindGameObjectWithTag("MainCamera");
+
+            // bad.GetComponentInChildren<SpriteRenderer>().sprite = badWithBooba;
+            bad.GetComponentInChildren<SpriteRenderer>().color = new Color(147/255f, 147/255f, 147/255f);
+            cam.GetComponent<Camera>().backgroundColor = new Color(46/255f, 46/255f, 46/255f);
+
+            newDay();
+        }
     }
 
     // hide text from helper
     void Hide() { helperText.text = ""; }
+
+    private void newDay()
+    {
+        day++;
+
+        // Сохраняем день
+        PlayerPrefs.SetInt("Day", day);
+        Debug.Log(PlayerPrefs.GetInt("Day"));
+        
+        // Сохраняем собранные карточки
+        try {
+            PlayerPrefs.SetInt("cards_counter", collectsCards.Count);
+            for (int i = 0; i < collectsCards.Count; i++)
+                PlayerPrefs.SetString("collectsCards_list" + i, collectsCards[i]);
+        } catch { Debug.Log("Player has't get any cards now"); }
+
+        // Сохраняем собранные предметы
+        try {
+            PlayerPrefs.SetInt("items_counter", items.Count);
+            for (int i = 0; i < items.Count; i++)
+                PlayerPrefs.SetString("items_list" + i, items[i]);
+        } catch { Debug.Log("Player has't get any items now"); }
+    }
+
+    private void getSaves()
+    {
+        PlayerPrefs.DeleteKey("Day");
+
+        try {
+            // Сохраняем день
+            day = PlayerPrefs.GetInt("Day");
+            
+            // Сохраняем собранные карточки
+            collectsCardsCount = PlayerPrefs.GetInt("cards_counter", collectsCards.Count);
+            for (int i = 0; i < collectsCards.Count; i++)
+                collectsCards.Add(PlayerPrefs.GetString("collectsCards_list" + i));
+
+            // Сохраняем собранные предметы
+            itemsCount = PlayerPrefs.GetInt("items_counter", items.Count);
+            for (int i = 0; i < items.Count; i++)
+                items.Add(PlayerPrefs.GetString("items_list" + i));
+        } catch {
+            Debug.Log("Game has't saves");
+        }
+    }
 
     private void Run()
     {
