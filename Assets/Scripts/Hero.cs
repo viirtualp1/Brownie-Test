@@ -32,10 +32,24 @@ public class Hero : MonoBehaviour
     public TMP_Text helperText;
 
     // Audio for Buba
+    public AudioSource sound1_1;
+    public AudioSource sound1_2;
+    public AudioSource sound1_3;
+
     public AudioSource sound1_5;
     public AudioSource sound1_4;
 
-    public  AudioSource sound1_8;
+    public AudioSource sound1_8;
+
+
+    // Audio for Kaktus
+    public AudioSource soundk1_1;
+    public AudioSource soundk1_2;
+    public AudioSource soundk1_3;
+    public AudioSource soundk1_4;
+    public AudioSource soundk1_5;
+
+
 
     // Триггер
     private bool isTriggeredCollectable = false;
@@ -369,6 +383,20 @@ public class Hero : MonoBehaviour
             // bad.GetComponentInChildren<SpriteRenderer>().sprite = badWithBooba;
             bad.GetComponentInChildren<SpriteRenderer>().color = new Color(147/255f, 147/255f, 147/255f);
             cam.GetComponent<Camera>().backgroundColor = new Color(46/255f, 46/255f, 46/255f);
+        }
+
+        // Разговор с кактусом
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            sound1_1.Play();
+            sound1_2.PlayDelayed(3f);
+            sound1_3.PlayDelayed(6f);
+
+            soundk1_1.PlayDelayed(10f);
+            soundk1_2.PlayDelayed(16f);
+            soundk1_3.PlayDelayed(29f);
+            soundk1_4.PlayDelayed(35f);
+            soundk1_5.PlayDelayed(44f);
         }
 
         // Триггеры в гараже
