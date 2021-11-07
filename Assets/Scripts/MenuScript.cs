@@ -5,7 +5,7 @@ public class MenuScript : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadScene("HallwayLargeRoom");
+        SceneManager.LoadScene("BedRoomScene");
     }
 
     public void QuitGame()
