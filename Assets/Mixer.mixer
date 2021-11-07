@@ -87,6 +87,7 @@ AudioMixerController:
     - 0fd89e54a0c314fbb82c692cb8f21fa0
     - e251f5e107059464587fc74206052cd5
     - 01952feed7d2f4aa1a193fbdb7082998
+    - 45b846aaba7e14ea5a60097f286bdaa4
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -102,6 +103,7 @@ AudioMixerGroupController:
   m_Children:
   - {fileID: -3933333114970975747}
   - {fileID: -5177200683724671891}
+  - {fileID: 3714846862263647357}
   m_Volume: 91bdbb63517c34f9aa3d9f2fc9d0d3d0
   m_Pitch: a11b2d7dd19054a7cb4dc6418b162932
   m_Send: 00000000000000000000000000000000
@@ -136,3 +138,36 @@ AudioMixerSnapshotController:
   m_SnapshotID: 512d400724e3d44f19e55f91edf6e75f
   m_FloatValues: {}
   m_TransitionOverrides: {}
+--- !u!243 &3714846862263647357
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SoundKaktus
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 45b846aaba7e14ea5a60097f286bdaa4
+  m_Children: []
+  m_Volume: 8ca898cd376a94ebfa97491c0668571a
+  m_Pitch: b72451bf9b5854f2ab72f17ce67d1e0b
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 7561094760743319207}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &7561094760743319207
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: e7af8ad50ba1f466aafc35174cc33646
+  m_EffectName: Attenuation
+  m_MixLevel: 9c453fa3411dd464fa4a72758e20bc73
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
