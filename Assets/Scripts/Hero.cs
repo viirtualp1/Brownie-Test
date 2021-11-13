@@ -269,10 +269,10 @@ public class Hero : MonoBehaviour
         } catch { }
 		
 		
-		if (SceneManager.GetActiveScene().name == "BedRoomScene" && day == 1)
-            GameObject.Find("Day 1 Start").GetComponent<AudioSource>().Play();
+		// if (SceneManager.GetActiveScene().name == "BedRoomScene" && day == 1)
+        //     GameObject.Find("Day 1 Start").GetComponent<AudioSource>().Play();
 
-        GameObject.Find("Day " + day + " BG").GetComponent<AudioSource>().Play();
+        // GameObject.Find("Day " + day + " BG").GetComponent<AudioSource>().Play();
 
         GetOrDupe.GetComponent<Canvas>().enabled = false;
         training.GetComponent<Canvas>().enabled = false;
@@ -455,7 +455,7 @@ public class Hero : MonoBehaviour
         if (isBadBooba && Input.GetKeyDown(KeyCode.X))
         {
             newDay();
-            GameObject.Find("Day " + day + " Start").GetComponent<AudioSource>().Play();
+            // GameObject.Find("Day " + day + " Start").GetComponent<AudioSource>().Play();
 
             switch (day)
             {
