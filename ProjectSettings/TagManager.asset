@@ -34,6 +34,7 @@ TagManager:
   - watering_can
   - plush
   - flowers
+  - ground
   layers:
   - Default
   - TransparentFX

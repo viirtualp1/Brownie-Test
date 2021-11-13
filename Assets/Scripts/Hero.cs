@@ -86,7 +86,6 @@ public class Hero : MonoBehaviour
 	public AudioSource menu;
 	public AudioSource titles;
 	
-
     public static int day = 1;
     
     public Sprite TVOnSprite;
@@ -200,12 +199,18 @@ public class Hero : MonoBehaviour
     void Start()
     {
         getSaves();
+        for (int i = 0; i < items.Count; i++)
+            Destroy(GameObject.Find(items[i]));
+
         if (day == 2) {
             currentTaskString = "Гараж";
+            PlayerPrefs.SetString("currentTaskString", currentTaskString);
         }
 
         if (SceneManager.GetActiveScene().name == "HomeBooba")
         {
+            speed = 6f;
+
             for (int i = 0; i < collectsCards.Count; i++)
             {
                 for (int j = 0; j < 10; j++)
@@ -258,43 +263,39 @@ public class Hero : MonoBehaviour
         } catch { }
 		
 		
-		if (day ==1)
-			{
-				dayloop1.Play();
-			}
+		if (day == 1)
+			dayloop1.Play();
 			
-		if (day ==2)
-			{
-				dayloop2.Play();
-				dayloop1.Stop();
-			}
+		if (day == 2)
+		{
+            dayloop2.Play();
+            dayloop1.Stop();
+        }
 			
-		if (day ==3)
-			{
-				dayloop3.Play();
-				dayloop2.Stop();
-			}
+		if (day == 3)
+        {
+            dayloop3.Play();
+            dayloop2.Stop();
+        }
 			
-		if (day ==4)
-			{
-				dayloop4.Play();
-				dayloop3.Stop();
-			}
+		if (day == 4)
+        {
+            dayloop4.Play();
+            dayloop3.Stop();
+        }
 			
-		if (day ==5)
-			{
-				dayloop5.Play();
-				dayloop4.Stop();
-			}
+		if (day == 5)
+        {
+            dayloop5.Play();
+            dayloop4.Stop();
+        }
 			
-		if (day ==6)
-			{
-				dayloop6.Play();
-				dayloop5.Stop();
-			}
+		if (day == 6)
+        {
+            dayloop6.Play();
+            dayloop5.Stop();
+        }
 			
-				
-
         currentTask();
 
         GetOrDupe.GetComponent<Canvas>().enabled = false;
@@ -316,6 +317,8 @@ public class Hero : MonoBehaviour
             currentTaskString = "Крыша";
         else if (day == 7)
             currentTaskString = "Конец";
+
+        PlayerPrefs.SetString("currentTaskString", currentTaskString);
     }
 
     private void Awake()
@@ -323,11 +326,6 @@ public class Hero : MonoBehaviour
         Instance = this;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-    }
-
-    private void FixedUpdate()
-    {
-        CheckGround();
     }
 
     private void Update()
@@ -442,6 +440,7 @@ public class Hero : MonoBehaviour
         {
             string nextRoom = room.gameObject.GetComponent<GoToDoor>().nextRoom;
             SceneManager.LoadScene(nextRoom);
+            Debug.Log(nextRoom);
         }
 
         // Выход в меню
@@ -487,6 +486,8 @@ public class Hero : MonoBehaviour
             saveItems();
 
             wireCounter++;
+            PlayerPrefs.SetInt("wire_counter", wireCounter);
+
             Destroy(wireObj);
         }
         if (wireCounter == 4 && isInstruments && Input.GetKeyDown(KeyCode.X))
@@ -677,7 +678,6 @@ public class Hero : MonoBehaviour
 
         // Сохраняем день
         PlayerPrefs.SetInt("Day", day);
-        Debug.Log(day);
     }
 
     private void saveCards()
@@ -689,18 +689,18 @@ public class Hero : MonoBehaviour
 
     private void saveItems()
     {
-        PlayerPrefs.SetInt("cards_counter", collectsCards.Count);
-        for (int i = 0; i < collectsCards.Count; i++)
-            PlayerPrefs.SetString("collectsCards_list" + i, collectsCards[i]);
+        PlayerPrefs.SetInt("items_counter", items.Count);
+        for (int i = 0; i < items.Count; i++)
+            PlayerPrefs.SetString("items_list" + i, items[i]);
     }
 
     private void getSaves()
     {
         // Сохраняем день
         day = PlayerPrefs.GetInt("Day");
-        Debug.Log(day);
+        Debug.Log("День: " + day);
             
-        // Сохраняем собранные карточки
+        // Получаем собранные карточки
         collectsCardsCount = PlayerPrefs.GetInt("cards_counter");
         collectsCards = new List<string>();
 
@@ -709,7 +709,7 @@ public class Hero : MonoBehaviour
 
         Debug.Log("Cards: " + collectsCards.Count);
 
-        // Сохраняем собранные предметы
+        // Получаем собранные предметы
         itemsCount = PlayerPrefs.GetInt("items_counter");
         items = new List<string>();
 
@@ -717,6 +717,13 @@ public class Hero : MonoBehaviour
             items.Add(PlayerPrefs.GetString("items_list" + i));
 
         Debug.Log("Items: " + items.Count);
+
+        // Получаем текущее заданий
+        currentTaskString = PlayerPrefs.GetString("currentTaskString");
+        Debug.Log("Текущее задание: " + currentTaskString);
+
+        // Получаем собранное число проводов
+        wireCounter = PlayerPrefs.GetInt("wire_counter");
     }
 
     private void Run()
@@ -730,13 +737,8 @@ public class Hero : MonoBehaviour
 
     private void Jump()
     {
+        isGrounded = false;
         rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-    }
-
-    private void CheckGround()
-    {
-        Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, 0.3f);
-        isGrounded = collider.Length > 1;
 
         if (!isGrounded) State = States.jump;
     }
@@ -798,6 +800,8 @@ public class Hero : MonoBehaviour
 
         if (collision.CompareTag("flowers")) { isFlowers = true; }
         if (collision.CompareTag("plush")) { isPlush = true; }
+    
+        if (collision.CompareTag("ground")) { isGrounded = true; }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
