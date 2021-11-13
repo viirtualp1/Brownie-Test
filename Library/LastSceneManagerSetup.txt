@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Garage.unity
+- path: Assets/Scenes/HallwayLargeRoom.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
