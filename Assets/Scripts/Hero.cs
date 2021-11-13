@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System;
 
 public class Hero : MonoBehaviour
 {
@@ -69,22 +71,22 @@ public class Hero : MonoBehaviour
     private float time = 2f;
 
 	// Переменные для музыки
-	public AudioSource dayloop1;
-	public AudioSource dayloop2;
-	public AudioSource dayloop3;
-	public AudioSource dayloop4;
-	public AudioSource dayloop5;
-	public AudioSource dayloop6;
-	public AudioSource dayclockloop1;
-	public AudioSource dayclockloop2;
-	public AudioSource dayclockloop3;
-	public AudioSource dayclockloop4;
-	public AudioSource dayclockloop5;
-	public AudioSource dayclockloop6;
-	public AudioSource chill;
-	public AudioSource intromenu;
-	public AudioSource menu;
-	public AudioSource titles;
+	// public AudioSource dayloop1;
+	// public AudioSource dayloop2;
+	// public AudioSource dayloop3;
+	// public AudioSource dayloop4;
+	// public AudioSource dayloop5;
+	// public AudioSource dayloop6;
+	// public AudioSource dayclockloop1;
+	// public AudioSource dayclockloop2;
+	// public AudioSource dayclockloop3;
+	// public AudioSource dayclockloop4;
+	// public AudioSource dayclockloop5;
+	// public AudioSource dayclockloop6;
+	// public AudioSource chill;
+	// public AudioSource intromenu;
+	// public AudioSource menu;
+	// public AudioSource titles;
 	
     public static int day = 1;
     
@@ -127,7 +129,7 @@ public class Hero : MonoBehaviour
 
     private int wireCounter = 0;
     
-    private string currentTaskString = "Гостиная";
+    private string currentTaskString = "Убрать спальню";
 
     // Касается ли игрок инструментов
     private bool isInstruments = false;
@@ -189,23 +191,32 @@ public class Hero : MonoBehaviour
 
     public Sprite badWithNoBooba;
 
+    private int day1Tasks = 0;
+
     private States State
     {
         get { return (States)anim.GetInteger("state"); }
         set { anim.SetInteger("state", (int)value); }
     }
 
+    private static bool isNullOrEmpty(string s)
+    {
+        return (s == null || s == String.Empty) ? true : false;
+    }
+
     // Методы
     void Start()
     {
         getSaves();
+
+        if (isNullOrEmpty(currentTaskString))
+        {
+            currentTaskString = "Убрать спальню";
+            saveAndUpdateCurrentTask(currentTaskString);
+        }
+
         for (int i = 0; i < items.Count; i++)
             Destroy(GameObject.Find(items[i]));
-
-        if (day == 2) {
-            currentTaskString = "Гараж";
-            PlayerPrefs.SetString("currentTaskString", currentTaskString);
-        }
 
         if (SceneManager.GetActiveScene().name == "HomeBooba")
         {
@@ -230,11 +241,6 @@ public class Hero : MonoBehaviour
         try {
             if (day >= 3)
                 cactus.GetComponent<SpriteRenderer>().sprite = cactus_new;
-        } catch { }
-
-        try {
-            if (day > 1)
-                Destroy(stickyNote_o);
         } catch { }
 
         try {
@@ -263,62 +269,33 @@ public class Hero : MonoBehaviour
         } catch { }
 		
 		
-		if (day == 1)
-			dayloop1.Play();
-			
-		if (day == 2)
-		{
-            dayloop2.Play();
-            dayloop1.Stop();
-        }
-			
-		if (day == 3)
-        {
-            dayloop3.Play();
-            dayloop2.Stop();
-        }
-			
-		if (day == 4)
-        {
-            dayloop4.Play();
-            dayloop3.Stop();
-        }
-			
-		if (day == 5)
-        {
-            dayloop5.Play();
-            dayloop4.Stop();
-        }
-			
-		if (day == 6)
-        {
-            dayloop6.Play();
-            dayloop5.Stop();
-        }
-			
-        currentTask();
+		if (SceneManager.GetActiveScene().name == "BedRoomScene" && day == 1)
+            GameObject.Find("Day 1 Start").GetComponent<AudioSource>().Play();
+
+        GameObject.Find("Day " + day + " BG").GetComponent<AudioSource>().Play();
 
         GetOrDupe.GetComponent<Canvas>().enabled = false;
         training.GetComponent<Canvas>().enabled = false;
-        items = new List<string>();
     }
 
     private void currentTask()
     {
-        if (day == 2)
-            currentTaskString = "Гостиная";
-        else if (day == 3)
-            currentTaskString = "Гараж";
-        else if (day == 4)
-            currentTaskString = "Ванная";
-        else if (day == 5)
-            currentTaskString = "Кухня";
-        else if (day == 6)
-            currentTaskString = "Крыша";
-        else if (day == 7)
-            currentTaskString = "Конец";
+        // if (day == 1)
+        //     currentTaskString = "Убрать спальню";
+        // else if (day == 2)
+        //     currentTaskString = "Убрать гостиную";
+        // else if (day == 3)
+        //     currentTaskString = "Убрать гараж";
+        // else if (day == 4)
+        //     currentTaskString = "Убрать ванную";
+        // else if (day == 5)
+        //     currentTaskString = "Убрать кухню";
+        // else if (day == 6)
+        //     currentTaskString = "Убрать крышу";
+        // else if (day == 7)
+        //     currentTaskString = "Конец";
 
-        PlayerPrefs.SetString("currentTaskString", currentTaskString);
+        // saveAndUpdateCurrentTask(currentTaskString);
     }
 
     private void Awake()
@@ -394,6 +371,9 @@ public class Hero : MonoBehaviour
             isBoobaCanJump = true;
             isStickyNote = false;
             isStickyNoteYes = false;
+
+            items.Add("training-item");
+            saveItems();
         }
 
         // Выбор: Что делать с карточкой? Выбросить, либо подобрать
@@ -440,7 +420,6 @@ public class Hero : MonoBehaviour
         {
             string nextRoom = room.gameObject.GetComponent<GoToDoor>().nextRoom;
             SceneManager.LoadScene(nextRoom);
-            Debug.Log(nextRoom);
         }
 
         // Выход в меню
@@ -474,7 +453,28 @@ public class Hero : MonoBehaviour
 
         // Буба ложится спать на свою кровать
         if (isBadBooba && Input.GetKeyDown(KeyCode.X))
+        {
             newDay();
+            GameObject.Find("Day " + day + " Start").GetComponent<AudioSource>().Play();
+
+            switch (day)
+            {
+                case 2:
+                    currentTaskString = "Убрать гостиную"; break;
+                case 3:
+                    currentTaskString = "Убрать гараж"; break;
+                case 4:
+                    currentTaskString = "Убрать ванную"; break;
+                case 5:
+                    currentTaskString = "Убрать кухню"; break;
+                case 6:
+                    currentTaskString = "Убрать крышу"; break;
+                case 7:
+                    currentTaskString = "Конец"; break;
+            }
+
+            saveAndUpdateCurrentTask(currentTaskString);
+        }
 
 
         // Триггеры в гараже
@@ -490,8 +490,10 @@ public class Hero : MonoBehaviour
 
             Destroy(wireObj);
         }
+
         if (wireCounter == 4 && isInstruments && Input.GetKeyDown(KeyCode.X))
             isTakeInstuments = true;
+
         if (isLightTrigger && Input.GetKeyDown(KeyCode.X))
         {
             string lightSprite = light.gameObject.GetComponent<CollectableScript>().itemType;
@@ -499,6 +501,7 @@ public class Hero : MonoBehaviour
             lightObj.GetComponent<SpriteRenderer>().sprite = newLight;
             isLightOff = true;
         }
+
         if (isTakeInstuments && isLightOff && isMining && Input.GetKeyDown(KeyCode.X))
         {
             string miningType = mining.gameObject.GetComponent<CollectableScript>().itemType;
@@ -508,22 +511,26 @@ public class Hero : MonoBehaviour
 
             Destroy(miningObj);
 
-            currentTaskString = "Ванная";
-            PlayerPrefs.SetString("currentTaskString", currentTaskString);
+            saveAndUpdateCurrentTask("Идти спать");
         }
 
         if (isBed && Input.GetKeyDown(KeyCode.X))
         {
             GameObject bedNow = GameObject.Find("Bed");
             bedNow.GetComponent<SpriteRenderer>().sprite = bedNew;
+
+            if (day == 1) day1Tasks++;
         }
 
         if (isBaika && Input.GetKeyDown(KeyCode.X))
         {
             GameObject baika = GameObject.Find("baika");
+            Destroy(baika);
+
             items.Add("baika");
             saveItems();
-            Destroy(baika);
+
+            day1Tasks++;
         }
 
         if (isStend && Input.GetKeyDown(KeyCode.X))
@@ -552,8 +559,7 @@ public class Hero : MonoBehaviour
             items.Add("wheel");
             saveItems();
 
-            currentTaskString = "Гараж";
-            PlayerPrefs.SetString("currentTaskString", currentTaskString);
+            saveAndUpdateCurrentTask("Идти спать");
         }
     
         if (isPuddle && Input.GetKeyDown(KeyCode.X))
@@ -579,8 +585,7 @@ public class Hero : MonoBehaviour
             GameObject ud = GameObject.Find("ud");
             ud.GetComponent<SpriteRenderer>().enabled = true;
             
-            currentTaskString = "Кухня";
-            PlayerPrefs.SetString("currentTaskString", currentTaskString);
+            saveAndUpdateCurrentTask("Идти спать");
         }
 
         if (isEgg && Input.GetKeyDown(KeyCode.X))
@@ -604,8 +609,7 @@ public class Hero : MonoBehaviour
             GameObject sink = GameObject.Find("sink");
             sink.GetComponent<SpriteRenderer>().sprite = newSink;
 
-            currentTaskString = "Крыша";
-            PlayerPrefs.SetString("currentTaskString", currentTaskString);
+            saveAndUpdateCurrentTask("Идти спать");
         }
 
         if (isFertilizer && Input.GetKeyDown(KeyCode.X))
@@ -657,20 +661,29 @@ public class Hero : MonoBehaviour
             GameObject plush = GameObject.Find("plush");
             plush.GetComponent<SpriteRenderer>().sprite = newPlush;
 
-            currentTaskString = "Конец";
-            PlayerPrefs.SetString("currentTaskString", currentTaskString);
+            saveAndUpdateCurrentTask("Идти спать");
         } else if (isTakeWateringCan && isTakeScissors && isTakeDichlorvos && isTakeFertilizer && isFlowers && Input.GetKeyDown(KeyCode.X))
         {
             GameObject flowers = GameObject.Find("flowers");
             flowers.GetComponent<SpriteRenderer>().sprite = newFlowers;
 
-            currentTaskString = "Конец";
-            PlayerPrefs.SetString("currentTaskString", currentTaskString);
+            saveAndUpdateCurrentTask("Идти спать");
         }
+
+        if (day == 1 && day1Tasks >= 2)
+            saveAndUpdateCurrentTask("Идти спать");
     }
+        
 
     // hide text from helper
     void Hide() { helperText.text = ""; }
+
+    private void saveAndUpdateCurrentTask(string task)
+    {
+        currentTaskString = task;
+        GameObject.Find("cts").GetComponent<Text>().text = currentTaskString;
+        PlayerPrefs.SetString("currentTaskString", currentTaskString);
+    }
 
     private void newDay()
     {
@@ -694,11 +707,13 @@ public class Hero : MonoBehaviour
             PlayerPrefs.SetString("items_list" + i, items[i]);
     }
 
-    private void getSaves()
+    public void getSaves()
     {
         // Сохраняем день
         day = PlayerPrefs.GetInt("Day");
-        Debug.Log("День: " + day);
+        if (day == 0) day = 1;
+
+        Debug.Log("Day: " + day);
             
         // Получаем собранные карточки
         collectsCardsCount = PlayerPrefs.GetInt("cards_counter");
@@ -720,6 +735,7 @@ public class Hero : MonoBehaviour
 
         // Получаем текущее заданий
         currentTaskString = PlayerPrefs.GetString("currentTaskString");
+        saveAndUpdateCurrentTask(currentTaskString);
         Debug.Log("Текущее задание: " + currentTaskString);
 
         // Получаем собранное число проводов

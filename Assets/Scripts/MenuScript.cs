@@ -12,4 +12,11 @@ public class MenuScript : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void NewGame()
+    {
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene("BedRoomScene");
+    }
 }
+
