@@ -324,8 +324,11 @@ public class Hero : MonoBehaviour
         }
 
         // Выход в меню
-        if (Input.GetKeyDown(KeyCode.Escape))
-            SceneManager.LoadScene("Menu");
+        // if (Input.GetKeyDown(KeyCode.Escape))
+        // {
+
+            // SceneManager.LoadScene("Menu");
+        // }
 
         // Вход в домик Бубы
         if (isDoorBooba && Input.GetKeyDown(KeyCode.X))
