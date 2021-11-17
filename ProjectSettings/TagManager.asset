@@ -6,7 +6,6 @@ TagManager:
   tags:
   - helper
   - door
-  - Collectable
   - homeBooba
   - badBooba
   - card
@@ -35,6 +34,14 @@ TagManager:
   - plush
   - flowers
   - ground
+  - hallway_items
+  - day1_items
+  - day2_items
+  - day3_items
+  - day4_items
+  - day5_items
+  - day6_items
+  - day7_items
   layers:
   - Default
   - TransparentFX

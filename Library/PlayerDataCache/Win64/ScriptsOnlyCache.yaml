@@ -1,13 +1,21 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - BathRoom
+    - BedRoom
     - CameraController
     - CollectableScript
+    - Garage
     - GoToDoor
     - Hero
+    - Kitchen
+    - LargeRoom
+    - MenuInGame
     - MenuScript
     - anySound
-    - cardsShow
+    - homeBooba
+    - livingRoom
+    - roof
     Unity.2D.Animation.Editor.dll:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.IK.Editor.dll:
@@ -21,6 +29,8 @@ ScriptsOnlyBuild:
     - UnityEditor.Tilemaps.SceneViewOpenTilePaletteHelper
     - UnityEditor.Tilemaps.TileDragAndDropManager
     - UnityEditor.Tilemaps.TilemapPrefabStageHelper
+    Unity.CollabProxy.Editor.dll:
+    - Unity.Cloud.Collaborate.UserInterface.CollaborateWindow
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.dll:
@@ -30,6 +40,12 @@ ScriptsOnlyBuild:
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
     - TMPro.TextMeshProUGUI
+    UnityEditor.Graphs.dll:
+    - UnityEditor.Graphs.AnimationBlendTree.Graph
+    - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.Graph
+    - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -41,6 +57,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.Text
   sceneClasses:
     Assets/Scenes/BathRoom.unity:
     - Class: 1
@@ -63,6 +80,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -70,14 +91,24 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1870}
+      Script: {instanceID: 1486}
     - Class: 114
-      Script: {instanceID: 3256}
+      Script: {instanceID: 1868}
     - Class: 114
-      Script: {instanceID: 3604}
+      Script: {instanceID: 2290}
     - Class: 114
-      Script: {instanceID: 5390}
+      Script: {instanceID: 2720}
+    - Class: 114
+      Script: {instanceID: 3274}
+    - Class: 114
+      Script: {instanceID: 3622}
+    - Class: 114
+      Script: {instanceID: 5354}
+    - Class: 114
+      Script: {instanceID: 5418}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -86,6 +117,12 @@ ScriptsOnlyBuild:
     - Class: 212
       Script: {instanceID: 0}
     - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
       Script: {instanceID: 0}
     Assets/Scenes/BedRoomScene.unity:
     - Class: 1
@@ -108,6 +145,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -115,28 +156,36 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
+      Script: {instanceID: 1484}
+    - Class: 114
       Script: {instanceID: 1486}
     - Class: 114
-      Script: {instanceID: 1864}
+      Script: {instanceID: 1868}
     - Class: 114
-      Script: {instanceID: 1870}
+      Script: {instanceID: 2156}
     - Class: 114
-      Script: {instanceID: 2704}
+      Script: {instanceID: 2290}
     - Class: 114
-      Script: {instanceID: 2876}
+      Script: {instanceID: 2720}
     - Class: 114
-      Script: {instanceID: 2926}
+      Script: {instanceID: 2896}
     - Class: 114
-      Script: {instanceID: 3256}
+      Script: {instanceID: 3274}
     - Class: 114
-      Script: {instanceID: 3358}
+      Script: {instanceID: 3376}
     - Class: 114
-      Script: {instanceID: 3604}
+      Script: {instanceID: 3492}
     - Class: 114
-      Script: {instanceID: 5390}
+      Script: {instanceID: 3622}
     - Class: 114
-      Script: {instanceID: 24180}
+      Script: {instanceID: 5418}
+    - Class: 114
+      Script: {instanceID: 17484}
+    - Class: 114
+      Script: {instanceID: 26062}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -173,6 +222,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -180,14 +233,24 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1870}
+      Script: {instanceID: 1486}
     - Class: 114
-      Script: {instanceID: 3256}
+      Script: {instanceID: 1868}
     - Class: 114
-      Script: {instanceID: 3604}
+      Script: {instanceID: 2290}
     - Class: 114
-      Script: {instanceID: 5390}
+      Script: {instanceID: 2720}
+    - Class: 114
+      Script: {instanceID: 2794}
+    - Class: 114
+      Script: {instanceID: 3274}
+    - Class: 114
+      Script: {instanceID: 3622}
+    - Class: 114
+      Script: {instanceID: 5418}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -196,6 +259,12 @@ ScriptsOnlyBuild:
     - Class: 212
       Script: {instanceID: 0}
     - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
       Script: {instanceID: 0}
     Assets/Scenes/HallwayLargeRoom.unity:
     - Class: 1
@@ -229,14 +298,26 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1870}
+      Script: {instanceID: 1486}
     - Class: 114
-      Script: {instanceID: 2514}
+      Script: {instanceID: 1868}
     - Class: 114
-      Script: {instanceID: 3256}
+      Script: {instanceID: 2238}
     - Class: 114
-      Script: {instanceID: 5390}
+      Script: {instanceID: 2290}
+    - Class: 114
+      Script: {instanceID: 2530}
+    - Class: 114
+      Script: {instanceID: 2720}
+    - Class: 114
+      Script: {instanceID: 3274}
+    - Class: 114
+      Script: {instanceID: 3622}
+    - Class: 114
+      Script: {instanceID: 5418}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -245,6 +326,12 @@ ScriptsOnlyBuild:
     - Class: 212
       Script: {instanceID: 0}
     - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
       Script: {instanceID: 0}
     Assets/Scenes/HomeBooba.unity:
     - Class: 1
@@ -267,6 +354,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -274,16 +365,28 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1870}
+      Script: {instanceID: 1486}
     - Class: 114
-      Script: {instanceID: 3224}
+      Script: {instanceID: 1868}
     - Class: 114
-      Script: {instanceID: 3256}
+      Script: {instanceID: 2290}
     - Class: 114
-      Script: {instanceID: 5390}
+      Script: {instanceID: 2720}
     - Class: 114
-      Script: {instanceID: 30512}
+      Script: {instanceID: 2896}
+    - Class: 114
+      Script: {instanceID: 3274}
+    - Class: 114
+      Script: {instanceID: 3376}
+    - Class: 114
+      Script: {instanceID: 3976}
+    - Class: 114
+      Script: {instanceID: 5418}
+    - Class: 114
+      Script: {instanceID: 26030}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -292,6 +395,12 @@ ScriptsOnlyBuild:
     - Class: 212
       Script: {instanceID: 0}
     - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
       Script: {instanceID: 0}
     Assets/Scenes/Kitchen.unity:
     - Class: 1
@@ -314,6 +423,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -321,18 +434,28 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1870}
+      Script: {instanceID: 1486}
     - Class: 114
-      Script: {instanceID: 2876}
+      Script: {instanceID: 1868}
     - Class: 114
-      Script: {instanceID: 3256}
+      Script: {instanceID: 2000}
     - Class: 114
-      Script: {instanceID: 3358}
+      Script: {instanceID: 2290}
     - Class: 114
-      Script: {instanceID: 3604}
+      Script: {instanceID: 2720}
     - Class: 114
-      Script: {instanceID: 5390}
+      Script: {instanceID: 2896}
+    - Class: 114
+      Script: {instanceID: 3274}
+    - Class: 114
+      Script: {instanceID: 3376}
+    - Class: 114
+      Script: {instanceID: 3622}
+    - Class: 114
+      Script: {instanceID: 5418}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -341,6 +464,12 @@ ScriptsOnlyBuild:
     - Class: 212
       Script: {instanceID: 0}
     - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
       Script: {instanceID: 0}
     Assets/Scenes/LivingRoom.unity:
     - Class: 1
@@ -363,6 +492,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -370,14 +503,24 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1870}
+      Script: {instanceID: 1486}
     - Class: 114
-      Script: {instanceID: 3256}
+      Script: {instanceID: 1868}
     - Class: 114
-      Script: {instanceID: 3604}
+      Script: {instanceID: 2290}
     - Class: 114
-      Script: {instanceID: 5390}
+      Script: {instanceID: 2306}
+    - Class: 114
+      Script: {instanceID: 2720}
+    - Class: 114
+      Script: {instanceID: 3274}
+    - Class: 114
+      Script: {instanceID: 3622}
+    - Class: 114
+      Script: {instanceID: 5418}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -386,6 +529,12 @@ ScriptsOnlyBuild:
     - Class: 212
       Script: {instanceID: 0}
     - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
       Script: {instanceID: 0}
     Assets/Scenes/Menu.unity:
     - Class: 1
@@ -410,6 +559,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -423,32 +576,36 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1486}
     - Class: 114
-      Script: {instanceID: 1864}
+      Script: {instanceID: 1862}
     - Class: 114
-      Script: {instanceID: 1870}
+      Script: {instanceID: 1868}
     - Class: 114
-      Script: {instanceID: 2268}
+      Script: {instanceID: 2282}
     - Class: 114
-      Script: {instanceID: 2704}
+      Script: {instanceID: 2290}
     - Class: 114
-      Script: {instanceID: 2876}
+      Script: {instanceID: 2720}
     - Class: 114
-      Script: {instanceID: 2926}
+      Script: {instanceID: 2896}
     - Class: 114
-      Script: {instanceID: 3358}
+      Script: {instanceID: 2946}
     - Class: 114
-      Script: {instanceID: 3474}
+      Script: {instanceID: 3376}
     - Class: 114
-      Script: {instanceID: 3604}
+      Script: {instanceID: 3492}
     - Class: 114
-      Script: {instanceID: 4704}
+      Script: {instanceID: 3622}
     - Class: 114
-      Script: {instanceID: 4866}
+      Script: {instanceID: 4730}
     - Class: 114
-      Script: {instanceID: 5224}
+      Script: {instanceID: 4892}
     - Class: 114
-      Script: {instanceID: 5266}
+      Script: {instanceID: 5250}
+    - Class: 114
+      Script: {instanceID: 5292}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -485,6 +642,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -492,12 +653,24 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1870}
+      Script: {instanceID: 1486}
     - Class: 114
-      Script: {instanceID: 3256}
+      Script: {instanceID: 1868}
     - Class: 114
-      Script: {instanceID: 5390}
+      Script: {instanceID: 1982}
+    - Class: 114
+      Script: {instanceID: 2290}
+    - Class: 114
+      Script: {instanceID: 2720}
+    - Class: 114
+      Script: {instanceID: 3274}
+    - Class: 114
+      Script: {instanceID: 3622}
+    - Class: 114
+      Script: {instanceID: 5418}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -506,6 +679,12 @@ ScriptsOnlyBuild:
     - Class: 212
       Script: {instanceID: 0}
     - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
       Script: {instanceID: 0}
   scriptHashData:
   - hash:
@@ -594,16 +773,40 @@ ScriptsOnlyBuild:
     className: TMP_FontAsset
   - hash:
       serializedVersion: 2
-      Hash: 27aa958f9f1d943bd922fdbdeeb2d8d1
+      Hash: 0b89d2b93920abc4bd84c3f8e6d4aa50
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Hero
+  - hash:
+      serializedVersion: 2
+      Hash: 45f5be9b8810fa0c76d30d873eae8255
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: roof
+  - hash:
+      serializedVersion: 2
+      Hash: 7e856a8eac65b2ad8ce07630e028d7c9
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Kitchen
+  - hash:
+      serializedVersion: 2
+      Hash: 56f7b0ed70b99af0e13ba0c3393667ae
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: BedRoom
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: GroupTrack
+  - hash:
+      serializedVersion: 2
+      Hash: f0159b7e7953c75014f5e636560da535
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: LargeRoom
   - hash:
       serializedVersion: 2
       Hash: 800c50acba124432abb4cf0d47202e06
@@ -616,6 +819,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Text
+  - hash:
+      serializedVersion: 2
+      Hash: 61df25ea8e3067676deea7d0095718fe
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: livingRoom
   - hash:
       serializedVersion: 2
       Hash: f1d735cc1a21c3704ab52568f4fbfcf8
@@ -652,6 +861,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: CanvasScaler
+  - hash:
+      serializedVersion: 2
+      Hash: 6aacb3409acec86cd08cf2b06b4fd3f4
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Garage
   - hash:
       serializedVersion: 2
       Hash: cf9f5cf2c3145a37ac07f00e50e460f9
@@ -724,12 +939,6 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools.TestRunner.Callbacks
     className: TestResultRendererCallback
-  - hash:
-      serializedVersion: 2
-      Hash: 149fa4a13dd12fc63d978f3a22e045cd
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: cardsShow
   - hash:
       serializedVersion: 2
       Hash: dda3574d3260fb2bdcfaa9c7273a5f5d
@@ -832,6 +1041,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
     className: BaseInput
+  - hash:
+      serializedVersion: 2
+      Hash: 78d96b2ec4ef4047c8904f6449d8c4c9
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: homeBooba
   - hash:
       serializedVersion: 2
       Hash: 18c222bef9ae745ce69ddde9b74337ca
@@ -1020,6 +1235,12 @@ ScriptsOnlyBuild:
     className: TMP_ScrollbarEventHandler
   - hash:
       serializedVersion: 2
+      Hash: 344e5f5f99c1c71026b06dd237a0b42f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: BathRoom
+  - hash:
+      serializedVersion: 2
       Hash: 65b3a3b9a7779d539ec75a3ceddebdba
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -1060,6 +1281,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.2D.IK.Runtime.dll
     namespaceName: UnityEngine.U2D.IK
     className: FabrikSolver2D
+  - hash:
+      serializedVersion: 2
+      Hash: 02e6483ba585336f78a48b8cf2289aa0
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MenuInGame
   platform: 19
   scenePathNames:
   - Assets/Scenes/Menu.unity
