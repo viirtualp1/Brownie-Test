@@ -14,6 +14,7 @@ public class Hero : MonoBehaviour
     // Лист собранных предметов (!добавлять id предметов, чтобы потом было их легко удалить!)
     public static List<string> items;
     public static List<string> collectsCards;
+    public static List<string> itemsSprites;
 
     // Приватные поля
     public static float speed = 3f; // Скорость движения
@@ -76,6 +77,8 @@ public class Hero : MonoBehaviour
     private int collectsCardsCount;
     private int itemsCount;
 
+    private int itemsSpritesCount;
+
     private string currentTaskString = "Убрать спальню и большую прихожую";
 
     // Взял ли игрок отвертку
@@ -132,10 +135,9 @@ public class Hero : MonoBehaviour
     private bool isItemDay7;
     private Collider2D itemDay7;
 
-    private bool isItemDay8;
-    private Collider2D itemDay8;
-
     private bool isLoot;
+
+    bool isCanBoobaSleep;
 
     private States State
     {
@@ -161,6 +163,11 @@ public class Hero : MonoBehaviour
 
         for (int i = 0; i < items.Count; i++)
             Destroy(GameObject.Find(items[i]));
+        
+        for (int i = 0; i < itemsSprites.Count; i++)
+        {
+            
+        }
 
         if (SceneManager.GetActiveScene().name == "HomeBooba")
         {
@@ -359,8 +366,10 @@ public class Hero : MonoBehaviour
             isTVOff = true;
         }
 
+        isCanBoobaSleep = checkCompleteTasks();
+
         // Буба ложится спать на свою кровать
-        if (isBadBooba && Input.GetKeyDown(KeyCode.X))
+        if (isCanBoobaSleep && isBadBooba && Input.GetKeyDown(KeyCode.X))
         {
             newDay();
 
@@ -387,32 +396,42 @@ public class Hero : MonoBehaviour
         {
             GameObject bedNow = GameObject.Find("Bed");
             bedNow.GetComponent<SpriteRenderer>().sprite = TriggerItems.GetComponent<BedRoom>().BedNew;
+            itemsSprites.Add("bedNew");
 
             if (day == 1) day1Tasks++;
 
             saveCountersTasks();
+            saveItems();
         }
 
         if (isImages && Input.GetKeyDown(KeyCode.X))
         {
             GameObject.Find("img1").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<livingRoom>().new_images;
+            itemsSprites.Add("new_images");
             day2Tasks++;
 
             saveCountersTasks();
+            saveItems();
         }
         
         if (isStend && Input.GetKeyDown(KeyCode.X))
         {
             GameObject.Find("stend1").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<livingRoom>().new_stend;
+            itemsSprites.Add("new_stend");
             day2Tasks++;
 
             saveCountersTasks();
+            saveItems();
         }
 
         if (isLightTrigger && Input.GetKeyDown(KeyCode.X))
         {
             isLightOff = true;
             GameObject.Find("Shitok1").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<Garage>().new_light;
+            itemsSprites.Add("new_light");
+            day2Tasks++;
+
+            saveItems();
             saveCountersTasks();
         }
 
@@ -464,9 +483,11 @@ public class Hero : MonoBehaviour
             if (itemHW == "Mirror")
             {
                 GameObject.Find("Mirror").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<BathRoom>().new_Mirror;
+                itemsSprites.Add("new_Mirror");
                 day4Tasks++;
 
                 saveCountersTasks();
+                saveItems();
             } else if (itemHW == "fishRod")
             {
                 GameObject.Find("angler").GetComponent<SpriteRenderer>().enabled = true;
@@ -489,8 +510,10 @@ public class Hero : MonoBehaviour
             if (itemHW == "sink")
             {
                 GameObject.Find("sink").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<Kitchen>().new_sink;
+                itemsSprites.Add("new_sink");
                 day5Tasks++;
 
+                saveItems();
                 saveCountersTasks();
             } else
             {
@@ -508,15 +531,20 @@ public class Hero : MonoBehaviour
             if (itemHW == "plush" && isTakeScissors && isTakeDichlorvos)
             {
                 GameObject.Find("plush").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<roof>().new_plush;
+                itemsSprites.Add("new_plush");
                 day6Tasks++;
 
                 saveCountersTasks();
+                saveItems();
             } else if (itemHW == "flowers" && isTakeWateringCan && isTakeFertilizer)
             {
                 GameObject.Find("flowers").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<roof>().new_flowers;
+                itemsSprites.Add("new_flowers");
+
                 day6Tasks++;
 
                 saveCountersTasks();
+                saveItems();
             } else if (itemHW == "fertilizer")
             {
                 isTakeFertilizer = true;
@@ -574,6 +602,23 @@ public class Hero : MonoBehaviour
         // if (day6Tasks >= 7 && day == 3) saveAndUpdateCurrentTask("Идти спать");
     }
 
+    private bool checkCompleteTasks()
+    {
+        switch (day)
+        {
+            case 1: if (day1Tasks >= 9) isCanBoobaSleep = true; break;
+            case 2: if (day2Tasks >= 3) isCanBoobaSleep = true; break;
+            case 3: if (day3Tasks >= 7) isCanBoobaSleep = true; break;
+            case 4: if (day4Tasks >= 5) isCanBoobaSleep = true; break;
+            case 5: if (day5Tasks >= 3) isCanBoobaSleep = true; break;
+            case 6: if (day6Tasks >= 6) isCanBoobaSleep = true; break;
+
+            default: return false;
+        }
+
+        return isCanBoobaSleep;
+    }
+
 
     private void saveAndUpdateCurrentTask(string task)
     {
@@ -618,6 +663,10 @@ public class Hero : MonoBehaviour
         PlayerPrefs.SetInt("items_counter", items.Count);
         for (int i = 0; i < items.Count; i++)
             PlayerPrefs.SetString("items_list" + i, items[i]);
+
+        PlayerPrefs.SetInt("items_sprites_counter", itemsSprites.Count);
+        for (int i = 0; i < itemsSprites.Count; i++)
+            PlayerPrefs.SetString("items_sprites_list" + i, itemsSprites[i]);
     }
 
     public void getSaves()
@@ -647,6 +696,13 @@ public class Hero : MonoBehaviour
             items.Add(PlayerPrefs.GetString("items_list" + i));
 
         Debug.Log("Items: " + items.Count);
+
+        // Получаем спрайти предметов
+        itemsSpritesCount = PlayerPrefs.GetInt("items_sprite_counter");
+        itemsSprites = new List<string>();
+
+        for (int i = 0; i < itemsSpritesCount; i++)
+            itemsSprites.Add(PlayerPrefs.GetString("items_sprites_list" + i));
 
         // Получаем текущее заданий
         currentTaskString = PlayerPrefs.GetString("currentTaskString");
