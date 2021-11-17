@@ -272,10 +272,66 @@ public class Hero : MonoBehaviour
             if (day < 6)
                 GameObject.Find("DoorToRoof").GetComponent<BoxCollider2D>().enabled = false;
         } catch { }
-		
-		
-		// if (SceneManager.GetActiveScene().name == "BedRoomScene" && day == 1)
-        //     GameObject.Find("Day 1 Start").GetComponent<AudioSource>().Play();
+
+        //day = 6;
+
+        // BG Music for BedRoomScene and HomeBooba
+		if (SceneManager.GetActiveScene().name == "BedRoomScene" && day < 7)
+        {
+            Debug.Log(day);
+            GameObject.Find("Day-start").GetComponent<AudioSource>().Play();
+        }
+
+        if (SceneManager.GetActiveScene().name == "HomeBooba" && day < 7)
+        {
+            Debug.Log(day);
+            GameObject.Find("Chill").GetComponent<AudioSource>().Play();
+        }
+
+        // BG Music 6 day for homes not BedRoomScene and HomeBooba
+
+        if (SceneManager.GetActiveScene().name != "BedRoomScene" && SceneManager.GetActiveScene().name != "HomeBooba")
+        {
+            Debug.Log(day);
+            GameObject.Find("Day " + day + " BG").GetComponent<AudioSource>().Play();
+        }
+
+        // if (SceneManager.GetActiveScene().name != "BedRoomScene" && SceneManager.GetActiveScene().name != "HomeBooba" && day == 1)
+        // {
+        //     Debug.Log(day);
+        //     GameObject.Find("Day 1 BG").GetComponent<AudioSource>().Play();
+        // }
+
+        // if (SceneManager.GetActiveScene().name != "BedRoomScene" && SceneManager.GetActiveScene().name != "HomeBooba" && day == 2)
+        // {
+        //     Debug.Log(day);
+        //     GameObject.Find("Day 2 BG").GetComponent<AudioSource>().Play();
+        // }
+
+        // if (SceneManager.GetActiveScene().name != "BedRoomScene" && SceneManager.GetActiveScene().name != "HomeBooba" && day == 3)
+        // {
+        //     Debug.Log(day);
+        //     GameObject.Find("Day 3 BG").GetComponent<AudioSource>().Play();
+        // }
+
+        // if (SceneManager.GetActiveScene().name != "BedRoomScene" && SceneManager.GetActiveScene().name != "HomeBooba" && day == 4)
+        // {
+        //     Debug.Log(day);
+        //     GameObject.Find("Day 4 BG").GetComponent<AudioSource>().Play();
+        // }
+
+        // if (SceneManager.GetActiveScene().name != "BedRoomScene" && SceneManager.GetActiveScene().name != "HomeBooba" && day == 5)
+        // {
+        //     Debug.Log(day);
+        //     GameObject.Find("Day 5 BG").GetComponent<AudioSource>().Play();
+        // }
+
+        // if (SceneManager.GetActiveScene().name != "BedRoomScene" && SceneManager.GetActiveScene().name != "HomeBooba" && day == 6)
+        // {
+        //     Debug.Log(day);
+        //     GameObject.Find("Day 6 BG").GetComponent<AudioSource>().Play();
+        // }
+
 
         // GameObject.Find("Day " + day + " BG").GetComponent<AudioSource>().Play();
 
@@ -413,6 +469,9 @@ public class Hero : MonoBehaviour
         {
             // Проверка задания (currentTaskString)
             // TODO Озвучка кактуса
+
+            // Озвучка Deg
+
         }
 
         // Вход в N комнату
@@ -519,10 +578,18 @@ public class Hero : MonoBehaviour
         //     saveAndUpdateCurrentTask("Идти спать");
         // }
 
+        // if (isBed)
+        // {
+        //     Debug.Log(isBed);
+        //     GameObject.Find("B-1-6").GetComponent<AudioSource>().PlayDelayed();
+        // }
+
         if (isBed && Input.GetKeyDown(KeyCode.X))
-        {
+        {   
+            GameObject.Find("B-1-6").GetComponent<AudioSource>().Play();
             GameObject bedNow = GameObject.Find("Bed");
             bedNow.GetComponent<SpriteRenderer>().sprite = TriggerItems.GetComponent<BedRoom>().BedNew;
+             GameObject.Find("B-1-7").GetComponent<AudioSource>().PlayDelayed(2f);
 
             if (day == 1) day1Tasks++;
 
@@ -686,9 +753,9 @@ public class Hero : MonoBehaviour
 
             saveCountersTasks();
         }
-        
+
         if (isStend && Input.GetKeyDown(KeyCode.X))
-        {
+        {   
             GameObject.Find("stend1").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<livingRoom>().new_stend;
             day2Tasks++;
 
