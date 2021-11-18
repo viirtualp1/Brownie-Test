@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuInGame : MonoBehaviour
 {
@@ -35,7 +36,7 @@ public class MenuInGame : MonoBehaviour
 
     public void Exit()
     {
-        Application.Quit();
+        SceneManager.LoadScene("Menu");
     } 
 
     public void Settings() {}
