@@ -212,12 +212,33 @@ public class Hero : MonoBehaviour
             if (day < 6)
                 GameObject.Find("DoorToRoof").GetComponent<BoxCollider2D>().enabled = false;
         } catch { }
-		
+
         try {
             stickyNoteSR = GameObject.Find("stickyNote").GetComponent<SpriteRenderer>();
         } catch {}
 
         TriggerItems = GameObject.Find("TriggerItems");
+
+        // BG Music for BedRoomScene and HomeBooba
+        if (SceneManager.GetActiveScene().name == "BedRoomScene" && day < 7)
+        {
+            Debug.Log(day);
+            GameObject.Find("Day-start").GetComponent<AudioSource>().Play();
+        }
+ 
+        if (SceneManager.GetActiveScene().name == "HomeBooba" && day < 7)
+        {
+            Debug.Log(day);
+            GameObject.Find("Chill").GetComponent<AudioSource>().Play();
+        }
+ 
+        // BG Music 6 day for homes not BedRoomScene and HomeBooba
+ 
+        if (SceneManager.GetActiveScene().name != "BedRoomScene" && SceneManager.GetActiveScene().name != "HomeBooba")
+        {
+            Debug.Log(day);
+            GameObject.Find("Day " + day + " BG").GetComponent<AudioSource>().Play();
+        }
     }
 
     // private void currentTask()
@@ -429,7 +450,7 @@ public class Hero : MonoBehaviour
             isLightOff = true;
             GameObject.Find("Shitok1").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<Garage>().new_light;
             itemsSprites.Add("new_light");
-            day2Tasks++;
+            day3Tasks++;
 
             saveItems();
             saveCountersTasks();
@@ -453,7 +474,7 @@ public class Hero : MonoBehaviour
             Destroy(GameObject.Find(itemHW));
             day2Tasks++;
             saveCountersTasks();
-        } else if (day3Tasks < 7 && isItemDay3 && Input.GetKeyDown(KeyCode.X))
+        } else if (day3Tasks < 6 && isItemDay3 && Input.GetKeyDown(KeyCode.X))
         {
             string itemHW = itemDay3.GetComponent<CollectableScript>().itemType;
 
@@ -557,15 +578,6 @@ public class Hero : MonoBehaviour
             } else if (itemHW == "dichlorvos")
             {
                 isTakeDichlorvos = true;
-                items.Add(itemHW);
-                saveItems();
-
-                Destroy(GameObject.Find(itemHW));
-                day6Tasks++;
-                saveCountersTasks();
-            } else if (itemHW == "scissors")
-            {
-                isTakeScissors = true;
                 items.Add(itemHW);
                 saveItems();
 

@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637726447389443165
-    m_Hash: 2172296685
+      ticks: 637728200249969948
+    m_Hash: 2214208300
   m_LockFileStatus:
     m_FilePath: C:/Users/virtu/Documents/GitHub/Brownie-Test/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637726447389522954
-    m_Hash: 260452267
+      ticks: 637728200250059397
+    m_Hash: 1925931900
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
