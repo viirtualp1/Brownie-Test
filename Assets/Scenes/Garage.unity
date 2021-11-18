@@ -3172,9 +3172,10 @@ GameObject:
   m_Component:
   - component: {fileID: 730587630}
   - component: {fileID: 730587631}
+  - component: {fileID: 730587632}
   m_Layer: 0
   m_Name: Instruments
-  m_TagString: instruments
+  m_TagString: day3_items
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3220,6 +3221,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.263507, y: 1.8674746}
   m_EdgeRadius: 0
+--- !u!114 &730587632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730587629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 993fdceab511d4350a4e3896a519d5bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemType: Instruments
 --- !u!1 &748163935
 GameObject:
   m_ObjectHideFlags: 0

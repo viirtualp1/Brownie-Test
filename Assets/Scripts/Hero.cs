@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
+using System.Threading.Tasks;
 
 public class Hero : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Hero : MonoBehaviour
     // Лист собранных предметов (!добавлять id предметов, чтобы потом было их легко удалить!)
     public static List<string> items;
     public static List<string> collectsCards;
+    public static List<string> itemsSprites;
 
     // Приватные поля
     public static float speed = 3f; // Скорость движения
@@ -26,12 +28,6 @@ public class Hero : MonoBehaviour
     public SpriteRenderer sprite;
 
     public static Hero Instance { get; set; }
-
-    // Триггер
-    private bool isTriggeredCollectable = false;
-
-    // Подбираемый ли предмет
-    private bool isCollectable = false;
 
     // Получаем коллайдер предмета (который хочет подобрать игрок)
     private Collider2D item;
@@ -48,7 +44,7 @@ public class Hero : MonoBehaviour
     private Collider2D room;
 
     // Триггерится ли игрок с кактусом
-    private bool isHelper;
+    // private bool isHelper;
 
     // Триггерится ли игрок с дверью
     private bool isDoor = false;
@@ -73,98 +69,36 @@ public class Hero : MonoBehaviour
     public static bool isBoobaCanMove = true;
     public static bool isBoobaCanJump = true;
 
-    // public GameObject GetOrDupe;
-    // private GameObject card_duplicate;
-    // private bool isChooseCardTakeOrDupe = false;
-    // private GameObject card_original;
-
     private bool isStickyNote;
-    // private GameObject stickyNote_original;
-    // private GameObject stickyNote_duplicate;
-
-    // Текст обучения
-    // public GameObject training;
 
     // Открыт ли стикер
     private bool isStickyNoteYes = false;
 
-    // Sprite bad with sleep Booba
-    // public Sprite badWithBooba;
-
     private int collectsCardsCount;
     private int itemsCount;
 
-    // public GameObject stickyNote_o;
+    private int itemsSpritesCount;
 
-    // private GameObject cardObject;
-
-    private Collider2D wire;
-    private bool isWire = false;
-
-    private int wireCounter = 0;
-    
     private string currentTaskString = "Убрать спальню и большую прихожую";
-
-    // Касается ли игрок инструментов
-    private bool isInstruments = false;
 
     // Взял ли игрок отвертку
     private bool isTakeInstuments = false;
 
-    // Касается ли игрок майнинг фермы
-    private bool isMining = false;
-
-    private Collider2D mining;
-
     private Collider2D light;
     private bool isLightOff = false;
     private bool isLightTrigger = false;
-    public Sprite newLight;
 
     // public Sprite bedNew;
     private bool isBed;
-    private bool isBad;
+    // private bool isBad;
 
-    private bool isBaika = false;
-
-    public Sprite newStend;
-    public Sprite newImages;
-    public Sprite newWheel;
     private bool isStend = false;
     private bool isImages = false;
-    private bool isWheel = false;
-
-    private bool isSleeve;
-    private bool isPuddle;
-
-    private bool isFishing;
-
-    private bool isEgg;
-    private bool isMatches;
-    private bool isSink;
-    private bool isMatchesComplete = false;
-    private bool isEggComplete = false;
-
-    private bool isFertilizer;
-    private bool isDichlorvos;
-    private bool isScissors;
-    private bool isWateringCan;
-    private bool isFlowers;
-
-    public Sprite newSink;
-    public Sprite newPlush;
-    public Sprite newFlowers;
 
     private bool isTakeFertilizer;
     private bool isTakeDichlorvos;
     private bool isTakeScissors;
     private bool isTakeWateringCan;
-
-    private bool isPlush;
-
-    // private bool isBoobaSleep;
-
-    // public Sprite badWithNoBooba;
 
     private int day1Tasks = 0;
     private int day2Tasks = 0;
@@ -201,8 +135,9 @@ public class Hero : MonoBehaviour
     private bool isItemDay7;
     private Collider2D itemDay7;
 
-    private bool isItemDay8;
-    private Collider2D itemDay8;
+    private bool isLoot;
+
+    bool isCanBoobaSleep;
 
     private States State
     {
@@ -228,6 +163,11 @@ public class Hero : MonoBehaviour
 
         for (int i = 0; i < items.Count; i++)
             Destroy(GameObject.Find(items[i]));
+        
+        for (int i = 0; i < itemsSprites.Count; i++)
+        {
+            
+        }
 
         if (SceneManager.GetActiveScene().name == "HomeBooba")
         {
@@ -273,79 +213,36 @@ public class Hero : MonoBehaviour
                 GameObject.Find("DoorToRoof").GetComponent<BoxCollider2D>().enabled = false;
         } catch { }
 
-        //day = 6;
-
-        // BG Music for BedRoomScene and HomeBooba
-		if (SceneManager.GetActiveScene().name == "BedRoomScene" && day < 7)
-        {
-            Debug.Log(day);
-            GameObject.Find("Day-start").GetComponent<AudioSource>().Play();
-        }
-
-        if (SceneManager.GetActiveScene().name == "HomeBooba" && day < 7)
-        {
-            Debug.Log(day);
-            GameObject.Find("Chill").GetComponent<AudioSource>().Play();
-        }
-
-        // BG Music 6 day for homes not BedRoomScene and HomeBooba
-
-        if (SceneManager.GetActiveScene().name != "BedRoomScene" && SceneManager.GetActiveScene().name != "HomeBooba")
-        {
-            Debug.Log(day);
-            GameObject.Find("Day " + day + " BG").GetComponent<AudioSource>().Play();
-        }
-
-        // if (SceneManager.GetActiveScene().name != "BedRoomScene" && SceneManager.GetActiveScene().name != "HomeBooba" && day == 1)
-        // {
-        //     Debug.Log(day);
-        //     GameObject.Find("Day 1 BG").GetComponent<AudioSource>().Play();
-        // }
-
-        // if (SceneManager.GetActiveScene().name != "BedRoomScene" && SceneManager.GetActiveScene().name != "HomeBooba" && day == 2)
-        // {
-        //     Debug.Log(day);
-        //     GameObject.Find("Day 2 BG").GetComponent<AudioSource>().Play();
-        // }
-
-        // if (SceneManager.GetActiveScene().name != "BedRoomScene" && SceneManager.GetActiveScene().name != "HomeBooba" && day == 3)
-        // {
-        //     Debug.Log(day);
-        //     GameObject.Find("Day 3 BG").GetComponent<AudioSource>().Play();
-        // }
-
-        // if (SceneManager.GetActiveScene().name != "BedRoomScene" && SceneManager.GetActiveScene().name != "HomeBooba" && day == 4)
-        // {
-        //     Debug.Log(day);
-        //     GameObject.Find("Day 4 BG").GetComponent<AudioSource>().Play();
-        // }
-
-        // if (SceneManager.GetActiveScene().name != "BedRoomScene" && SceneManager.GetActiveScene().name != "HomeBooba" && day == 5)
-        // {
-        //     Debug.Log(day);
-        //     GameObject.Find("Day 5 BG").GetComponent<AudioSource>().Play();
-        // }
-
-        // if (SceneManager.GetActiveScene().name != "BedRoomScene" && SceneManager.GetActiveScene().name != "HomeBooba" && day == 6)
-        // {
-        //     Debug.Log(day);
-        //     GameObject.Find("Day 6 BG").GetComponent<AudioSource>().Play();
-        // }
-
-
-        // GameObject.Find("Day " + day + " BG").GetComponent<AudioSource>().Play();
-
-        // GetOrDupe.GetComponent<Canvas>().enabled = false;
-
         try {
             stickyNoteSR = GameObject.Find("stickyNote").GetComponent<SpriteRenderer>();
         } catch {}
 
         TriggerItems = GameObject.Find("TriggerItems");
+
+        // BG Music for BedRoomScene and HomeBooba
+        if (SceneManager.GetActiveScene().name == "BedRoomScene" && day < 7)
+        {
+            Debug.Log(day);
+            GameObject.Find("Day-start").GetComponent<AudioSource>().Play();
+        }
+ 
+        if (SceneManager.GetActiveScene().name == "HomeBooba" && day < 7)
+        {
+            Debug.Log(day);
+            GameObject.Find("Chill").GetComponent<AudioSource>().Play();
+        }
+ 
+        // BG Music 6 day for homes not BedRoomScene and HomeBooba
+ 
+        if (SceneManager.GetActiveScene().name != "BedRoomScene" && SceneManager.GetActiveScene().name != "HomeBooba")
+        {
+            Debug.Log(day);
+            GameObject.Find("Day " + day + " BG").GetComponent<AudioSource>().Play();
+        }
     }
 
-    private void currentTask()
-    {
+    // private void currentTask()
+    // {
         // if (day == 1)
         //     currentTaskString = "Убрать спальню и большую прихожую";
         // else if (day == 3)
@@ -360,7 +257,7 @@ public class Hero : MonoBehaviour
         //     currentTaskString = "Убрать крышу";
 
         // saveAndUpdateCurrentTask(currentTaskString);
-    }
+    // }
 
     private void Awake()
     {
@@ -369,25 +266,33 @@ public class Hero : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
+    private async void animationLoot()
+    {
+        isGrounded = false;
+        isBoobaCanJump = false;
+        isBoobaCanMove = false;
+        isLoot = true;
+        State = States.loot;
+
+        await Task.Delay(900);
+
+        isGrounded = true;
+        isBoobaCanJump = true;
+        isBoobaCanMove = true;
+        isLoot = false;
+    }
+
     private void Update()
     {
         // Если Буба стоит на земле => анимация idle
         if (isGrounded) State = States.idle;
+        if (!isLoot && Input.GetKeyDown(KeyCode.X)) animationLoot();
 
         // Ходьба и прыжки Бубы
         if (isBoobaCanMove && Input.GetButton("Horizontal"))
             Run();
         if (isBoobaCanJump && isGrounded && Input.GetKeyDown(KeyCode.Space))
             Jump();
-
-        // Подбираем N предмет
-        if (isTriggeredCollectable && isCollectable && Input.GetKeyDown(KeyCode.X))
-        {
-            string itemType = item.gameObject.GetComponent<CollectableScript>().itemType;
-            items.Add(itemType);
-
-            Destroy(item.gameObject);
-        }
 
         // Подбираем карточку
         if (isCardTake && Input.GetKeyDown(KeyCode.X))
@@ -432,47 +337,12 @@ public class Hero : MonoBehaviour
             saveItems();
         }
 
-        // Выбор: Что делать с карточкой? Выбросить, либо подобрать
-        // if (isChooseCardTakeOrDupe)
-        // {
-        //     if (Input.GetKeyDown(KeyCode.F))
-        //     {
-        //         string cardType = cardTake.gameObject.GetComponent<CollectableScript>().itemType;
-        //         collectsCards = new List<string>();
-        //         collectsCards.Add(cardType);
-                
-        //         Destroy(card_original);
-        //         Destroy(card_duplicate);
-        //         isCardTake = false;
-
-        //         GetOrDupe.GetComponent<Canvas>().enabled = false;
-        //         isBoobaCanMove = true;
-        //         isBoobaCanJump = true;
-        //         isChooseCardTakeOrDupe = false;
-
-        //         saveCards();
-        //     } 
-            
-        //     if (Input.GetKeyDown(KeyCode.C)) 
-        //     {
-        //         GetOrDupe.GetComponent<Canvas>().enabled = false;
-        //         Destroy(card_duplicate);
-
-        //         isBoobaCanMove = true;
-        //         isBoobaCanJump = true;
-        //         isChooseCardTakeOrDupe = false;
-        //     }
-        // }
-
         // попросить помощи у Кактуса (нажав Z)
-        if (isHelper && Input.GetKeyDown(KeyCode.Z))
-        {
+        // if (isHelper && Input.GetKeyDown(KeyCode.Z))
+        // {
             // Проверка задания (currentTaskString)
             // TODO Озвучка кактуса
-
-            // Озвучка Deg
-
-        }
+        // }
 
         // Вход в N комнату
         if (isDoor && Input.GetKeyDown(KeyCode.X))
@@ -482,8 +352,11 @@ public class Hero : MonoBehaviour
         }
 
         // Выход в меню
-        if (Input.GetKeyDown(KeyCode.Escape))
-            SceneManager.LoadScene("Menu");
+        // if (Input.GetKeyDown(KeyCode.Escape))
+        // {
+
+            // SceneManager.LoadScene("Menu");
+        // }
 
         // Вход в домик Бубы
         if (isDoorBooba && Input.GetKeyDown(KeyCode.X))
@@ -514,12 +387,12 @@ public class Hero : MonoBehaviour
             isTVOff = true;
         }
 
+        isCanBoobaSleep = checkCompleteTasks();
+
         // Буба ложится спать на свою кровать
-        if (isBadBooba && Input.GetKeyDown(KeyCode.X))
+        if (isCanBoobaSleep && isBadBooba && Input.GetKeyDown(KeyCode.X))
         {
             newDay();
-
-            // GameObject.Find("Day " + day + " Start").GetComponent<AudioSource>().Play();
 
             scriptHomeBooba.BoobaSleep();
 
@@ -540,232 +413,46 @@ public class Hero : MonoBehaviour
             saveAndUpdateCurrentTask(currentTaskString);
         }
 
-
-        // Триггеры в гараже
-        // if (wireCounter < 4 && isWire && Input.GetKeyDown(KeyCode.X))
-        // {
-        //     string provodType = wire.gameObject.GetComponent<CollectableScript>().itemType;
-        //     GameObject wireObj = GameObject.Find(provodType);
-        //     items.Add(provodType);
-        //     saveItems();
-
-        //     wireCounter++;
-        //     PlayerPrefs.SetInt("wire_counter", wireCounter);
-
-        //     Destroy(wireObj);
-        // }
-
-        // if (wireCounter == 4 && isInstruments && Input.GetKeyDown(KeyCode.X))
-        //     isTakeInstuments = true;
-
-        // if (isLightTrigger && Input.GetKeyDown(KeyCode.X))
-        // {
-        //     string lightSprite = GetComponent<Light>().gameObject.GetComponent<CollectableScript>().itemType;
-        //     GameObject lightObj = GameObject.Find(lightSprite);
-        //     lightObj.GetComponent<SpriteRenderer>().sprite = newLight;
-        //     isLightOff = true;
-        // }
-
-        // if (isTakeInstuments && isLightOff && isMining && Input.GetKeyDown(KeyCode.X))
-        // {
-        //     string miningType = mining.gameObject.GetComponent<CollectableScript>().itemType;
-        //     GameObject miningObj = GameObject.Find(miningType);
-        //     items.Add(miningType);
-        //     saveItems();
-
-        //     Destroy(miningObj);
-
-        //     saveAndUpdateCurrentTask("Идти спать");
-        // }
-
-        // if (isBed)
-        // {
-        //     Debug.Log(isBed);
-        //     GameObject.Find("B-1-6").GetComponent<AudioSource>().PlayDelayed();
-        // }
-
         if (isBed && Input.GetKeyDown(KeyCode.X))
-        {   
-            GameObject.Find("B-1-6").GetComponent<AudioSource>().Play();
+        {
             GameObject bedNow = GameObject.Find("Bed");
             bedNow.GetComponent<SpriteRenderer>().sprite = TriggerItems.GetComponent<BedRoom>().BedNew;
-             GameObject.Find("B-1-7").GetComponent<AudioSource>().PlayDelayed(2f);
+            itemsSprites.Add("bedNew");
 
             if (day == 1) day1Tasks++;
 
             saveCountersTasks();
+            saveItems();
         }
-
-        // if (isBaika && Input.GetKeyDown(KeyCode.X))
-        // {
-        //     GameObject baika = GameObject.Find("baika");
-        //     Destroy(baika);
-
-        //     items.Add("baika");
-        //     saveItems();
-
-        //     day1Tasks++;
-
-        //     Debug.Log(day1Tasks);
-        // }
-
-        // if (isStend && Input.GetKeyDown(KeyCode.X))
-        // {
-        //     GameObject stend = GameObject.Find("stend1");
-        //     stend.GetComponent<SpriteRenderer>().sprite = newStend;
-            
-        //     items.Add("stend1");
-        //     saveItems();
-        // }
-
-        // if (isImages && Input.GetKeyDown(KeyCode.X))
-        // {
-        //     GameObject images = GameObject.Find("img1");
-        //     images.GetComponent<SpriteRenderer>().sprite = newImages;
-        
-        //     items.Add("img1");
-        //     saveItems();
-        // }
-
-        // if (isWheel && Input.GetKeyDown(KeyCode.X))
-        // {
-        //     GameObject wheel = GameObject.Find("wheel");
-        //     wheel.GetComponent<SpriteRenderer>().sprite = newWheel;
-        
-        //     items.Add("wheel");
-        //     saveItems();
-
-        //     saveAndUpdateCurrentTask("Идти спать");
-        // }
-    
-        // if (isPuddle && Input.GetKeyDown(KeyCode.X))
-        // {
-        //     GameObject puddle = GameObject.Find("puddle");
-        //     Destroy(puddle);
-            
-        //     items.Add("puddle");
-        //     saveItems();
-        // }
-
-        // if (isSleeve && Input.GetKeyDown(KeyCode.X))
-        // {
-        //     GameObject sleeve = GameObject.Find("sleeve");
-        //     Destroy(sleeve);
-
-        //     items.Add("sleeve");
-        //     saveItems();
-        // }
-
-        // if (isFishing && Input.GetKeyDown(KeyCode.X))
-        // {
-        //     GameObject ud = GameObject.Find("ud");
-        //     ud.GetComponent<SpriteRenderer>().enabled = true;
-            
-        //     saveAndUpdateCurrentTask("Идти спать");
-        // }
-
-        // if (isEgg && Input.GetKeyDown(KeyCode.X))
-        // {
-        //     GameObject egg = GameObject.Find("egg");
-        //     Destroy(egg);
-
-        //     isEggComplete = true;
-        // }
-
-        // if (isMatches && Input.GetKeyDown(KeyCode.X))
-        // {
-        //     GameObject mat = GameObject.Find("matches");
-        //     Destroy(mat);
-
-        //     isMatchesComplete = true;
-        // }
-
-        // if (isMatchesComplete && isEggComplete && isSink && Input.GetKeyDown(KeyCode.X))
-        // {
-        //     GameObject sink = GameObject.Find("sink");
-        //     sink.GetComponent<SpriteRenderer>().sprite = newSink;
-
-        //     saveAndUpdateCurrentTask("Идти спать");
-        // }
-
-        // if (isFertilizer && Input.GetKeyDown(KeyCode.X))
-        // {
-        //     GameObject fertilizer = GameObject.Find("fertilizer");
-        //     Destroy(fertilizer);
-            
-        //     items.Add("fertilizer");
-        //     saveItems();
-
-        //     isTakeFertilizer = true;
-        // }
-
-        // if (isDichlorvos && Input.GetKeyDown(KeyCode.X))
-        // {
-        //     GameObject dichlorvos = GameObject.Find("dichlorvos");
-        //     Destroy(dichlorvos);
-
-        //     items.Add("dichlorvos");
-        //     saveItems();
-
-        //     isTakeDichlorvos = true;
-        // }
-
-        // if (isScissors && Input.GetKeyDown(KeyCode.X))
-        // {
-        //     GameObject scissors = GameObject.Find("scissors");
-        //     Destroy(scissors);
-
-        //     items.Add("scissors");
-        //     saveItems();
-
-        //     isTakeScissors = true;
-        // }
-
-        // if (isWateringCan && Input.GetKeyDown(KeyCode.X))
-        // {
-        //     GameObject watering_can = GameObject.Find("watering_can");
-        //     Destroy(watering_can);
-
-        //     items.Add("watering_can");
-        //     saveItems();
-            
-        //     isTakeWateringCan = true;
-        // }
-
-        // if (isTakeWateringCan && isTakeScissors && isTakeDichlorvos && isTakeFertilizer && isPlush && Input.GetKeyDown(KeyCode.X))
-        // {  
-        //     GameObject plush = GameObject.Find("plush");
-        //     plush.GetComponent<SpriteRenderer>().sprite = newPlush;
-
-        //     saveAndUpdateCurrentTask("Идти спать");
-        // } else if (isTakeWateringCan && isTakeScissors && isTakeDichlorvos && isTakeFertilizer && isFlowers && Input.GetKeyDown(KeyCode.X))
-        // {
-        //     GameObject flowers = GameObject.Find("flowers");
-        //     flowers.GetComponent<SpriteRenderer>().sprite = newFlowers;
-
-        //     saveAndUpdateCurrentTask("Идти спать");
-        // }
 
         if (isImages && Input.GetKeyDown(KeyCode.X))
         {
             GameObject.Find("img1").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<livingRoom>().new_images;
+            itemsSprites.Add("new_images");
             day2Tasks++;
 
             saveCountersTasks();
+            saveItems();
         }
-
+        
         if (isStend && Input.GetKeyDown(KeyCode.X))
-        {   
+        {
             GameObject.Find("stend1").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<livingRoom>().new_stend;
+            itemsSprites.Add("new_stend");
             day2Tasks++;
 
             saveCountersTasks();
+            saveItems();
         }
 
         if (isLightTrigger && Input.GetKeyDown(KeyCode.X))
         {
             isLightOff = true;
             GameObject.Find("Shitok1").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<Garage>().new_light;
+            itemsSprites.Add("new_light");
+            day3Tasks++;
+
+            saveItems();
             saveCountersTasks();
         }
 
@@ -787,13 +474,13 @@ public class Hero : MonoBehaviour
             Destroy(GameObject.Find(itemHW));
             day2Tasks++;
             saveCountersTasks();
-        } else if (day3Tasks < 7 && isItemDay3 && Input.GetKeyDown(KeyCode.X))
+        } else if (day3Tasks < 6 && isItemDay3 && Input.GetKeyDown(KeyCode.X))
         {
             string itemHW = itemDay3.GetComponent<CollectableScript>().itemType;
 
             if (itemHW == "Instruments")
                 isTakeInstuments = true;
-            if (itemHW == "Fermas")
+            if (itemHW == "Fermas") {
                 if (isTakeInstuments && isLightOff) {
                     items.Add(itemHW);
                     saveItems();
@@ -802,7 +489,7 @@ public class Hero : MonoBehaviour
                     day3Tasks++;
                     saveCountersTasks();
                 }
-            else {
+            } else if (itemHW != "Instruments") {
                 items.Add(itemHW);
                 saveItems();
 
@@ -810,23 +497,147 @@ public class Hero : MonoBehaviour
                 day3Tasks++;
                 saveCountersTasks();
             }
+        } else if (day4Tasks < 5 && isItemDay4 && Input.GetKeyDown(KeyCode.X))
+        {
+            string itemHW = itemDay4.GetComponent<CollectableScript>().itemType;
+
+            if (itemHW == "Mirror")
+            {
+                GameObject.Find("Mirror").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<BathRoom>().new_Mirror;
+                itemsSprites.Add("new_Mirror");
+                day4Tasks++;
+
+                saveCountersTasks();
+                saveItems();
+            } else if (itemHW == "fishRod")
+            {
+                GameObject.Find("angler").GetComponent<SpriteRenderer>().enabled = true;
+                day4Tasks++;
+
+                saveCountersTasks();
+            } else 
+            {
+                items.Add(itemHW);
+                saveItems();
+
+                Destroy(GameObject.Find(itemHW));
+                day4Tasks++;
+                saveCountersTasks();
+            }
+        } else if (day5Tasks < 3 && isItemDay5 && Input.GetKeyDown(KeyCode.X))
+        {
+            string itemHW = itemDay5.GetComponent<CollectableScript>().itemType;
+
+            if (itemHW == "sink")
+            {
+                GameObject.Find("sink").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<Kitchen>().new_sink;
+                itemsSprites.Add("new_sink");
+                day5Tasks++;
+
+                saveItems();
+                saveCountersTasks();
+            } else
+            {
+                items.Add(itemHW);
+                saveItems();
+
+                Destroy(GameObject.Find(itemHW));
+                day5Tasks++;
+                saveCountersTasks();
+            }
+        } else if (day6Tasks < 7 && isItemDay6 && Input.GetKeyDown(KeyCode.X))
+        {
+            string itemHW = itemDay6.GetComponent<CollectableScript>().itemType;
+
+            if (itemHW == "plush" && isTakeScissors && isTakeDichlorvos)
+            {
+                GameObject.Find("plush").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<roof>().new_plush;
+                itemsSprites.Add("new_plush");
+                day6Tasks++;
+
+                saveCountersTasks();
+                saveItems();
+            } else if (itemHW == "flowers" && isTakeWateringCan && isTakeFertilizer)
+            {
+                GameObject.Find("flowers").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<roof>().new_flowers;
+                itemsSprites.Add("new_flowers");
+
+                day6Tasks++;
+
+                saveCountersTasks();
+                saveItems();
+            } else if (itemHW == "fertilizer")
+            {
+                isTakeFertilizer = true;
+                items.Add(itemHW);
+                saveItems();
+
+                Destroy(GameObject.Find(itemHW));
+                day6Tasks++;
+                saveCountersTasks();
+            } else if (itemHW == "dichlorvos")
+            {
+                isTakeDichlorvos = true;
+                items.Add(itemHW);
+                saveItems();
+
+                Destroy(GameObject.Find(itemHW));
+                day6Tasks++;
+                saveCountersTasks();
+            } else if (itemHW == "scissors")
+            {
+                isTakeScissors = true;
+                items.Add(itemHW);
+                saveItems();
+
+                Destroy(GameObject.Find(itemHW));
+                day6Tasks++;
+                saveCountersTasks();
+            } else if (itemHW == "watering_can")
+            {
+                isTakeWateringCan = true;
+                items.Add(itemHW);
+                saveItems();
+
+                Destroy(GameObject.Find(itemHW));
+                day6Tasks++;
+                saveCountersTasks();
+            }
         }
         
         if (day1Tasks >= 9 && day == 1) saveAndUpdateCurrentTask("Идти спать");
         if (day2Tasks >= 3 && day == 2) saveAndUpdateCurrentTask("Идти спать");
         if (day3Tasks >= 7 && day == 3) saveAndUpdateCurrentTask("Идти спать");
+        if (day4Tasks >= 5 && day == 4) saveAndUpdateCurrentTask("Идти спать");
+        if (day5Tasks >= 3 && day == 5) saveAndUpdateCurrentTask("Идти спать");
+        if (day6Tasks >= 6 && day == 6) saveAndUpdateCurrentTask("Идти спать");
+        // if (day6Tasks >= 7 && day == 3) saveAndUpdateCurrentTask("Идти спать");
     }
 
+    private bool checkCompleteTasks()
+    {
+        switch (day)
+        {
+            case 1: if (day1Tasks >= 9) isCanBoobaSleep = true; break;
+            case 2: if (day2Tasks >= 3) isCanBoobaSleep = true; break;
+            case 3: if (day3Tasks >= 7) isCanBoobaSleep = true; break;
+            case 4: if (day4Tasks >= 5) isCanBoobaSleep = true; break;
+            case 5: if (day5Tasks >= 3) isCanBoobaSleep = true; break;
+            case 6: if (day6Tasks >= 6) isCanBoobaSleep = true; break;
 
-    // hide text from helper
-    // void Hide() { helperText.text = ""; }
+            default: return false;
+        }
+
+        return isCanBoobaSleep;
+    }
+
 
     private void saveAndUpdateCurrentTask(string task)
     {
         Debug.Log(task);
 
         currentTaskString = task;
-        GameObject.Find("cts").GetComponent<Text>().text = currentTaskString;
+        GameObject.Find("cts").GetComponent<Text>().text = "Текущее задание: " + currentTaskString;
         PlayerPrefs.SetString("currentTaskString", currentTaskString);
     }
 
@@ -846,7 +657,7 @@ public class Hero : MonoBehaviour
         day++;
 
         // Обновляем день в Text объекте (для UX)
-        GameObject.Find("cd").GetComponent<Text>().text = day.ToString();
+        GameObject.Find("cd").GetComponent<Text>().text = "День: " + day.ToString();
 
         // Сохраняем день
         PlayerPrefs.SetInt("Day", day);
@@ -864,6 +675,10 @@ public class Hero : MonoBehaviour
         PlayerPrefs.SetInt("items_counter", items.Count);
         for (int i = 0; i < items.Count; i++)
             PlayerPrefs.SetString("items_list" + i, items[i]);
+
+        PlayerPrefs.SetInt("items_sprites_counter", itemsSprites.Count);
+        for (int i = 0; i < itemsSprites.Count; i++)
+            PlayerPrefs.SetString("items_sprites_list" + i, itemsSprites[i]);
     }
 
     public void getSaves()
@@ -872,7 +687,7 @@ public class Hero : MonoBehaviour
         day = PlayerPrefs.GetInt("Day");
         if (day == 0) day = 1;
 
-        GameObject.Find("cd").GetComponent<Text>().text = day.ToString();
+        GameObject.Find("cd").GetComponent<Text>().text = "День: " + day.ToString();
 
         Debug.Log("Day: " + day);
             
@@ -894,13 +709,17 @@ public class Hero : MonoBehaviour
 
         Debug.Log("Items: " + items.Count);
 
+        // Получаем спрайти предметов
+        itemsSpritesCount = PlayerPrefs.GetInt("items_sprite_counter");
+        itemsSprites = new List<string>();
+
+        for (int i = 0; i < itemsSpritesCount; i++)
+            itemsSprites.Add(PlayerPrefs.GetString("items_sprites_list" + i));
+
         // Получаем текущее заданий
         currentTaskString = PlayerPrefs.GetString("currentTaskString");
         saveAndUpdateCurrentTask(currentTaskString);
         Debug.Log("Текущее задание: " + currentTaskString);
-
-        // Получаем собранное число проводов
-        wireCounter = PlayerPrefs.GetInt("wire_counter");
 
         day1Tasks = PlayerPrefs.GetInt("day1Tasks");
         day2Tasks = PlayerPrefs.GetInt("day2Tasks");
@@ -941,22 +760,11 @@ public class Hero : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Collectable"))
-        {
-            item = collision;
-            isCollectable = true;
-            isTriggeredCollectable = true;
-        }
-
         if (collision.CompareTag("door"))
         {
             room = collision;
             isDoor = true;
         }
-
-        if (collision.CompareTag("helper")) { isHelper = true; }
-
-        if (collision.CompareTag("homeBooba")) { isDoorBooba = true; }
 
         if (collision.CompareTag("card")) { isCardTake = true; cardTake = collision; }
 
@@ -965,34 +773,10 @@ public class Hero : MonoBehaviour
         if (collision.CompareTag("RCB")) { TV = collision; isRCB = true; }
 
         if (collision.CompareTag("training")) { isStickyNote = true; stickyNote = collision; }
-        
-        // if (collision.CompareTag("wires")) { isWire = true; wire = collision; }
-
-        // if (collision.CompareTag("instruments")) { isInstruments = true; }
-
-        // if (collision.CompareTag("mining")) { isMining = true; mining = collision; }
 
         if (collision.CompareTag("light")) { isLightTrigger = true; light = collision; }
 
         if (collision.CompareTag("bed")) { isBed = true; }
-
-        // if (collision.CompareTag("baika")) { isBaika = true; }
-
-        // if (collision.CompareTag("puddle")) { isPuddle = true; }
-        // if (collision.CompareTag("sleeve")) { isSleeve = true; }
-        // if (collision.CompareTag("fishing_rod")) { isFishing = true; }
-        
-        // if (collision.CompareTag("matches")) { isMatches = true; }
-        // if (collision.CompareTag("sink")) { isSink = true; }
-        // if (collision.CompareTag("egg")) { isEgg = true; }
-
-        // if (collision.CompareTag("fertilizer")) { isFertilizer = true; }
-        // if (collision.CompareTag("dichlorvos")) { isDichlorvos = true; }
-        // if (collision.CompareTag("scissors")) { isScissors = true; }
-        // if (collision.CompareTag("watering_can")) { isWateringCan = true; }
-
-        // if (collision.CompareTag("flowers")) { isFlowers = true; }
-        // if (collision.CompareTag("plush")) { isPlush = true; }
 
         if (collision.CompareTag("stend")) { isStend = true; }
 
@@ -1009,12 +793,8 @@ public class Hero : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        isHelper = false;
         item = null;
-        isCollectable = false;
-        isTriggeredCollectable = false;
         isDoor = false;
-        isDoorBooba = false;
         isBadBooba = false;
         isCardTake = false;
         cardTake = null;
@@ -1025,32 +805,25 @@ public class Hero : MonoBehaviour
 
         isImages = false;
         isStend = false;
-        // isWire = false;
-        // wire = null;
-        // isInstruments = false;
-        // isMining = false;
-        // mining = null;
-        // isLightOff = false;
-        // isMatches = false;
-        // isSink = false;
-        // isEgg = false;
-        // isFlowers = false;
-        // isPlush = false;
-        // isDichlorvos = false;
-        // isScissors = false;
-        // isWateringCan = false;
-        isBad = false;
-        isBaika = false;
+
         isItemDay1 = false;
         itemDay1 = null;
+
         isItemDay2 = false;
         itemDay2 = null;
+
         isItemDay3 = false;
+        itemDay2 = null;
+
+        isItemDay4 = false;
         itemDay4 = null;
+
         isItemDay5 = false;
         itemDay5 = null;
+
         isItemDay6 = false;
         itemDay6 = null;
+
         isItemDay7 = false;
         itemDay7 = null;
     }
