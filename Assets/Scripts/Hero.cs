@@ -370,7 +370,14 @@ public class Hero : MonoBehaviour
             // Voices for translate
             if (nextRoom == "HallwayLargeRoom" && c_voicetrns1 == 0)
             {
-                GameObject.Find("K-1-8").GetComponent<AudioSource>().Play();
+                try
+                {
+                    GameObject.Find("K-1-8").GetComponent<AudioSource>().Play();
+                }
+                catch
+                {
+                    Debug.Log("huy");
+                }
                 //yield return new WaitForSeconds(0.5f);
                 SceneManager.LoadScene(nextRoom);
             } else 
@@ -567,37 +574,21 @@ public class Hero : MonoBehaviour
 
         }
 
-
-
-
         if (day1Tasks < 9 && isItemDay1 && Input.GetKeyDown(KeyCode.X))
         {
-            Debug.Log(day1Tasks);
-
             string itemHW = itemDay1.GetComponent<CollectableScript>().itemType;
-
-            Debug.Log(itemHW);
-
 
             // Voice baika add
             if (itemHW == "baika")
-            {
                 GameObject.Find("B-1-9").GetComponent<AudioSource>().Play();
-            }
 
             // Voice cream add
             if (itemHW == "cream")
-            {   
                 GameObject.Find("B-1-13").GetComponent<AudioSource>().Play();
-            }
 
             // Voice Umbrella add
             if (itemHW == "Umbrella")
-            {
                 GameObject.Find("B-1-17").GetComponent<AudioSource>().Play();
-            }
-
-
 
             items.Add(itemHW);
             saveItems();
@@ -751,6 +742,7 @@ public class Hero : MonoBehaviour
         if (day4Tasks >= 5 && day == 4) saveAndUpdateCurrentTask("Идти спать");
         if (day5Tasks >= 3 && day == 5) saveAndUpdateCurrentTask("Идти спать");
         if (day6Tasks >= 6 && day == 6) saveAndUpdateCurrentTask("Идти спать");
+        if (day == 7) SceneManager.LoadScene("CutsceneEnd");
         // if (day6Tasks >= 7 && day == 3) saveAndUpdateCurrentTask("Идти спать");
     }
 

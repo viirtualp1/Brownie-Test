@@ -16,7 +16,7 @@ public class MenuScript : MonoBehaviour
     public void NewGame()
     {
         PlayerPrefs.DeleteAll();
-        SceneManager.LoadScene("BedRoomScene");
+        SceneManager.LoadScene("CutsceneStart");
     }
 }
 

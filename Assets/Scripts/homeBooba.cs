@@ -9,17 +9,21 @@ public class homeBooba : MonoBehaviour
     public Sprite badWithBooba;
     public Sprite badWithoutBooba;
 
+    private int card_counter = 0;
+
     public void showCards()
     {
         Hero.speed = 6f;
 
         for (int i = 0; i < Hero.collectsCards.Count; i++)
         {
-            for (int j = 0; j < 10; j++)
+            for (int j = card_counter; j < card_counter + 10; j++)
             {
                 cardObject = GameObject.Find("card1 (" + j + ")");
                 cardObject.GetComponent<SpriteRenderer>().color = Color.white;
             }
+
+            card_counter += 10;
         }
     }
 
