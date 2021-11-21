@@ -258,6 +258,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7208281316487333509, guid: 0a3d1dce7546af94f81c91cbb40fb366, type: 3}
+      propertyPath: m_Text
+      value: "\u0412\u044B\u0445\u043E\u0434"
+      objectReference: {fileID: 0}
     - target: {fileID: 7208281316839120420, guid: 0a3d1dce7546af94f81c91cbb40fb366, type: 3}
       propertyPath: m_Name
       value: 'Menu '
@@ -3461,7 +3465,7 @@ PrefabInstance:
     - target: {fileID: 735569891497248825, guid: 7c278d888b6178b40a977b952ae9a770, type: 3}
       propertyPath: menuUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1236234661}
     - target: {fileID: 766489493989466630, guid: 7c278d888b6178b40a977b952ae9a770, type: 3}
       propertyPath: m_Name
       value: MenuScript
@@ -6622,6 +6626,11 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.79, y: 4.79}
   m_EdgeRadius: 0
+--- !u!1 &1236234661 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7208281316839120420, guid: 0a3d1dce7546af94f81c91cbb40fb366, type: 3}
+  m_PrefabInstance: {fileID: 13833327}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1277735334
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9147,7 +9156,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1676390902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.38, y: 1.15, z: 135.16641}
+  m_LocalPosition: {x: -13.81, y: 1.15, z: 135.16641}
   m_LocalScale: {x: 0.30398443, y: 0.25192666, z: 1}
   m_Children: []
   m_Father: {fileID: 1647819654}
@@ -9592,7 +9601,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -9.142353, y: 1.1206613}
+  m_Offset: {x: -9.277336, y: 1.289391}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -9603,7 +9612,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.9076614, y: 4.201849}
+  m_Size: {x: 2.6376944, y: 3.8643894}
   m_EdgeRadius: 0
 --- !u!4 &1716929552
 Transform:
@@ -10313,7 +10322,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1850878353}
-  - component: {fileID: 1850878352}
   m_Layer: 0
   m_Name: Shitoks new
   m_TagString: light
@@ -10321,32 +10329,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!61 &1850878352
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1850878350}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -9.142353, y: 1.1206613}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.9076614, y: 4.201849}
-  m_EdgeRadius: 0
 --- !u!4 &1850878353
 Transform:
   m_ObjectHideFlags: 0

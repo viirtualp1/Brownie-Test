@@ -470,7 +470,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.83461833}
+  m_Offset: {x: 0, y: -2.1965303}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -481,7 +481,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 14.49, y: 12.070763}
+  m_Size: {x: 14.49, y: 9.346939}
   m_EdgeRadius: 0
 --- !u!114 &163495933
 MonoBehaviour:
@@ -2164,7 +2164,7 @@ PrefabInstance:
     - target: {fileID: 735569891497248825, guid: 7c278d888b6178b40a977b952ae9a770, type: 3}
       propertyPath: menuUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1916031267}
     - target: {fileID: 766489493989466630, guid: 7c278d888b6178b40a977b952ae9a770, type: 3}
       propertyPath: m_Name
       value: MenuScript
@@ -4577,7 +4577,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.028518498, y: 1.5106477}
+  m_Offset: {x: 0.028518438, y: 1.7959225}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -4588,7 +4588,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.3050375, y: 3.3523428}
+  m_Size: {x: 2.3050375, y: 2.781793}
   m_EdgeRadius: 0
 --- !u!114 &1903198494
 MonoBehaviour:
@@ -4821,6 +4821,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7208281316487333509, guid: 0a3d1dce7546af94f81c91cbb40fb366, type: 3}
+      propertyPath: m_Text
+      value: "\u0412\u044B\u0445\u043E\u0434"
+      objectReference: {fileID: 0}
     - target: {fileID: 7208281316839120420, guid: 0a3d1dce7546af94f81c91cbb40fb366, type: 3}
       propertyPath: m_Name
       value: 'Menu '
@@ -4843,6 +4847,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a3d1dce7546af94f81c91cbb40fb366, type: 3}
+--- !u!1 &1916031267 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7208281316839120420, guid: 0a3d1dce7546af94f81c91cbb40fb366, type: 3}
+  m_PrefabInstance: {fileID: 1916031266}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2020391982
 GameObject:
   m_ObjectHideFlags: 0
