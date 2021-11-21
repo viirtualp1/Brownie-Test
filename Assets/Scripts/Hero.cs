@@ -232,8 +232,8 @@ public class Hero : MonoBehaviour
         }
 
         try {
-            // if (day >= 3)
-                // cactus.GetComponent<SpriteRenderer>().sprite = cactus_new;
+            if (day >= 3)
+                GameObject.Find("helper").GetComponent<SpriteRenderer>().sprite = GameObject.Find("TriggerItems").GetComponent<BedRoom>().cactus_new;
         } catch { }
 
         try {
@@ -577,26 +577,8 @@ public class Hero : MonoBehaviour
         // Буба ложится спать на свою кровать
         if (isCanBoobaSleep && isBadBooba && Input.GetKeyDown(KeyCode.X))
         {   
-            // GameObject.Find("K-" + day + "-S").GetComponent<AudioSource>().Play();
-
             // Voices for Буба ложится спать
-            if (day == 1)
-                GameObject.Find("K-1-S").GetComponent<AudioSource>().Play();
-
-            if (day == 2)
-                GameObject.Find("K-2-S").GetComponent<AudioSource>().Play();
-
-            if (day == 3)
-                GameObject.Find("K-3-S").GetComponent<AudioSource>().Play();
-            
-            if (day == 4)
-                GameObject.Find("K-4-S").GetComponent<AudioSource>().Play();
-
-            if (day == 5)
-                GameObject.Find("K-5-S").GetComponent<AudioSource>().Play();
-
-            if (day == 6)
-                GameObject.Find("K-6-S").GetComponent<AudioSource>().Play();
+            GameObject.Find("K-" + day + "-S").GetComponent<AudioSource>().Play();
 
             newDay();
 
