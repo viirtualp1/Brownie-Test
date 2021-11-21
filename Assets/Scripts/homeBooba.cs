@@ -34,7 +34,7 @@ public class homeBooba : MonoBehaviour
         Hero.isBoobaCanMove = false;
         Hero.isBoobaCanJump = false;
 
-        await Task.Delay(2000);
+        await Task.Delay(4000);
 
         GameObject.Find("bedBooba").GetComponent<SpriteRenderer>().sprite = badWithoutBooba;
         GameObject.Find("Circle").GetComponent<SpriteRenderer>().enabled = true;

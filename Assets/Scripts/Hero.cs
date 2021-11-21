@@ -365,14 +365,11 @@ public class Hero : MonoBehaviour
             stickyNoteSR.enabled = true;
             isBoobaCanMove = false;
             isBoobaCanJump = false;
-
-            TriggerItems.GetComponent<BedRoom>().Training.GetComponent<Canvas>().enabled = true;
         }
 
         // Закрываем стикер с обучением
         if (isStickyNote && Input.GetKeyDown(KeyCode.C))
         {
-            TriggerItems.GetComponent<BedRoom>().Training.GetComponent<Canvas>().enabled = false;
             stickyNoteSR.enabled = false;
 
             Destroy(TriggerItems.GetComponent<BedRoom>().stickyNote);
@@ -787,7 +784,6 @@ public class Hero : MonoBehaviour
                 GameObject.Find("B-2-9").GetComponent<AudioSource>().Play();
                 GameObject.Find("K-2-4").GetComponent<AudioSource>().PlayDelayed(3f);
             }
-
         }
 
         // Voices for day3
@@ -927,9 +923,7 @@ public class Hero : MonoBehaviour
 
             // Voice pain add
             if (itemHW == "краски")
-            {
                 GameObject.Find("B-2-10").GetComponent<AudioSource>().Play();
-            }
 
             items.Add(itemHW);
             saveItems();
@@ -976,7 +970,9 @@ public class Hero : MonoBehaviour
 
                 saveCountersTasks();
                 saveItems();
-            } else if (itemHW == "fishRod")
+            }
+            
+            if (itemHW == "fishRod")
             {
                 GameObject.Find("B-4-10").GetComponent<AudioSource>().Play();
                 GameObject.Find("angler").GetComponent<SpriteRenderer>().enabled = true;
