@@ -283,8 +283,15 @@ public class Hero : MonoBehaviour
 
         for (int i = 0; i < itemsSprites.Count; i++)
         {
-            GameObject.Find(itemsSprites[i]).SetActive(false);
-            GameObject.Find(itemsSprites[i] + " new").GetComponent<SpriteRenderer>().enabled = true;
+            try
+            {
+                GameObject.Find(itemsSprites[i]).SetActive(false);
+                GameObject.Find(itemsSprites[i] + " new").GetComponent<SpriteRenderer>().enabled = true;
+            }
+            catch
+            {
+                Debug.Log(itemsSprites[i]); 
+            }
         }
     }
 
@@ -619,7 +626,10 @@ public class Hero : MonoBehaviour
             //GameObject.Find("B-1-6").GetComponent<AudioSource>().Play();
 
             GameObject bedNow = GameObject.Find("Bed");
-            GameObject.Find("Bed").SetActive(false);
+            try
+            {
+                GameObject.Find("Bed").SetActive(false);
+            } catch {}
             GameObject.Find("Bed new").GetComponent<SpriteRenderer>().enabled = true;
             itemsSprites.Add("Bed");
 
@@ -904,6 +914,7 @@ public class Hero : MonoBehaviour
             Destroy(GameObject.Find(itemHW));
             day1Tasks++;
             saveCountersTasks();
+            Debug.Log(day1Tasks);
         } else if (day2Tasks < 3 && isItemDay2 && Input.GetKeyDown(KeyCode.X))
         {
             string itemHW = itemDay2.GetComponent<CollectableScript>().itemType;
@@ -934,6 +945,15 @@ public class Hero : MonoBehaviour
                     saveCountersTasks();
                 }
             } else if (itemHW != "Instruments") {
+                items.Add(itemHW);
+                saveItems();
+
+                Destroy(GameObject.Find(itemHW));
+                day3Tasks++;
+                saveCountersTasks();
+            }
+            else
+            {
                 items.Add(itemHW);
                 saveItems();
 
