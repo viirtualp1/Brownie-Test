@@ -211,11 +211,6 @@ public class Hero : MonoBehaviour
 
         for (int i = 0; i < items.Count; i++)
             Destroy(GameObject.Find(items[i]));
-        
-        for (int i = 0; i < itemsSprites.Count; i++)
-        {
-            
-        }
 
         if (SceneManager.GetActiveScene().name == "HomeBooba")
         {
@@ -226,10 +221,8 @@ public class Hero : MonoBehaviour
         } else speed = 3f;
 
         for (int i = 0; i < collectsCards.Count; i++)
-        {
             if (GameObject.Find(collectsCards[i]))
                 Destroy(GameObject.Find(collectsCards[i]));
-        }
 
         try {
             if (day >= 3)
@@ -286,6 +279,12 @@ public class Hero : MonoBehaviour
         {
             Debug.Log(day);
             GameObject.Find("Day " + day + " BG").GetComponent<AudioSource>().Play();
+        }
+
+        for (int i = 0; i < itemsSprites.Count; i++)
+        {
+            GameObject.Find(itemsSprites[i]).SetActive(false);
+            GameObject.Find(itemsSprites[i] + " new").GetComponent<SpriteRenderer>().enabled = true;
         }
     }
 
@@ -620,8 +619,9 @@ public class Hero : MonoBehaviour
             //GameObject.Find("B-1-6").GetComponent<AudioSource>().Play();
 
             GameObject bedNow = GameObject.Find("Bed");
-            bedNow.GetComponent<SpriteRenderer>().sprite = TriggerItems.GetComponent<BedRoom>().BedNew;
-            itemsSprites.Add("bedNew");
+            GameObject.Find("Bed").SetActive(false);
+            GameObject.Find("Bed new").GetComponent<SpriteRenderer>().enabled = true;
+            itemsSprites.Add("Bed");
 
             if (c_voicebed2 == 0)
             {
@@ -641,8 +641,9 @@ public class Hero : MonoBehaviour
 
         if (isImages && Input.GetKeyDown(KeyCode.X))
         {
-            GameObject.Find("img1").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<livingRoom>().new_images;
-            itemsSprites.Add("new_images");
+            GameObject.Find("img1").SetActive(false);
+            GameObject.Find("img1 new").GetComponent<SpriteRenderer>().enabled = true;
+            itemsSprites.Add("img1");
             day2Tasks++;
 
             saveCountersTasks();
@@ -651,8 +652,9 @@ public class Hero : MonoBehaviour
         
         if (isStend && Input.GetKeyDown(KeyCode.X))
         {
-            GameObject.Find("stend1").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<livingRoom>().new_stend;
-            itemsSprites.Add("new_stend");
+            GameObject.Find("stend1").SetActive(false);
+            GameObject.Find("stend1 new").GetComponent<SpriteRenderer>().enabled = true;
+            itemsSprites.Add("stend1");
             day2Tasks++;
 
             saveCountersTasks();
@@ -669,8 +671,9 @@ public class Hero : MonoBehaviour
                 c_chitok = 1;
             }
 
-            GameObject.Find("Shitok1").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<Garage>().new_light;
-            itemsSprites.Add("new_light");
+            GameObject.Find("Shitok1").SetActive(false);
+            GameObject.Find("Shitok1 new").GetComponent<SpriteRenderer>().enabled = true;
+            itemsSprites.Add("Shitok1");
             day3Tasks++;
 
             saveItems();
@@ -978,8 +981,9 @@ public class Hero : MonoBehaviour
 
             if (itemHW == "sink")
             {
-                GameObject.Find("sink").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<Kitchen>().new_sink;
-                itemsSprites.Add("new_sink");
+                GameObject.Find("sink").SetActive(false);
+                GameObject.Find("sink new").GetComponent<SpriteRenderer>().enabled = true;
+                itemsSprites.Add("sink");
                 day5Tasks++;
 
                 saveItems();
@@ -1000,8 +1004,9 @@ public class Hero : MonoBehaviour
 
             if (itemHW == "plush" && isTakeScissors && isTakeDichlorvos)
             {
-                GameObject.Find("plush").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<roof>().new_plush;
-                itemsSprites.Add("new_plush");
+                GameObject.Find("plush").SetActive(false);
+                GameObject.Find("plush new").GetComponent<SpriteRenderer>().enabled = true;
+                itemsSprites.Add("plush");
 
                 // Voice plush  add
                 GameObject.Find("B-6-5").GetComponent<AudioSource>().Play();
@@ -1012,8 +1017,9 @@ public class Hero : MonoBehaviour
                 saveItems();
             } else if (itemHW == "flowers" && isTakeWateringCan && isTakeFertilizer)
             {
-                GameObject.Find("flowers").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<roof>().new_flowers;
-                itemsSprites.Add("new_flowers");
+                GameObject.Find("flowers").SetActive(false);
+                GameObject.Find("flowers new").GetComponent<SpriteRenderer>().enabled = true;
+                itemsSprites.Add("flowers");
 
                 // Voice flowers  add
                 GameObject.Find("B-6-3").GetComponent<AudioSource>().Play();
@@ -1136,6 +1142,9 @@ public class Hero : MonoBehaviour
         PlayerPrefs.SetInt("items_sprites_counter", itemsSprites.Count);
         for (int i = 0; i < itemsSprites.Count; i++)
             PlayerPrefs.SetString("items_sprites_list" + i, itemsSprites[i]);
+
+        Debug.Log("items saved: " + items.Count);
+        Debug.Log("items sprites saved: " + itemsSprites.Count);
     }
 
     public void getSaves()
@@ -1167,11 +1176,13 @@ public class Hero : MonoBehaviour
         Debug.Log("Items: " + items.Count);
 
         // Получаем спрайти предметов
-        itemsSpritesCount = PlayerPrefs.GetInt("items_sprite_counter");
+        itemsSpritesCount = PlayerPrefs.GetInt("items_sprites_counter");
         itemsSprites = new List<string>();
 
         for (int i = 0; i < itemsSpritesCount; i++)
             itemsSprites.Add(PlayerPrefs.GetString("items_sprites_list" + i));
+
+        Debug.Log("Items sprites: " + itemsSprites.Count);
 
         // Получаем текущее заданий
         currentTaskString = PlayerPrefs.GetString("currentTaskString");
