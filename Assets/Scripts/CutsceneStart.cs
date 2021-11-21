@@ -49,7 +49,7 @@ public class CutsceneStart : MonoBehaviour
 
             GameObject.Find("booba-sprite").GetComponent<SpriteRenderer>().enabled = true;
 
-            await Task.Delay(28000);
+            await Task.Delay(31000);
 
             SceneManager.LoadScene("BedRoomScene");
         }

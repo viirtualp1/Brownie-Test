@@ -95,6 +95,9 @@ public class Hero : MonoBehaviour
 
     private int c_voiceclock3_sp = 0;
     
+    private int c_voiceStickyNote1 = 0;
+    private int c_voiceStickyNote2 = 0;
+
     private int c_voicebaika = 0;
     private int c_voicetrcan = 0;
     private int c_voicebed = 0;
@@ -116,6 +119,7 @@ public class Hero : MonoBehaviour
     private int c_voicefermas2 = 0;
     private int c_voiceprovod = 0;
     private int c_chitok = 0;
+    private int c_voicecactus = 0;
 
     private int c_voicerazor = 0;
     private int c_voicesleeve = 0;
@@ -127,6 +131,8 @@ public class Hero : MonoBehaviour
 
     private int c_voiceflowers = 0;
     private int c_voiceplush = 0;
+
+    private int c_voicematches = 0;
 
     // public Sprite bedNew;
     private bool isBed;
@@ -363,9 +369,24 @@ public class Hero : MonoBehaviour
             saveCards();
         }
 
+        // Voice for StickyNote
+        if (isStickyNote && c_voiceStickyNote1 == 0)
+        {
+            GameObject.Find("B-1-5").GetComponent<AudioSource>().Play();
+            c_voiceStickyNote1 = 1;
+        }
+
         // Открываем стикер с обучением
         if (!isStickyNoteYes && isStickyNote)
-        {
+        {   
+
+            // Voice for StickyNote
+            if (isStickyNote && c_voiceStickyNote2 == 0)
+            {
+                GameObject.Find("B-1-4").GetComponent<AudioSource>().PlayDelayed(4f);
+                c_voiceStickyNote2 = 1;
+            }
+
             isStickyNoteYes = true;
 
             stickyNoteSR.enabled = true;
@@ -608,9 +629,15 @@ public class Hero : MonoBehaviour
         }
 
         // Voice1 for bed coll
-        if (isBed && c_voicebed == 0)
+        if (isBed && c_voicebed == 0 && day == 1)
         {
             GameObject.Find("B-1-6").GetComponent<AudioSource>().Play();
+            c_voicebed = 1;
+        }
+
+        if (isBed && c_voicebed == 0 && day == 3)
+        {
+            GameObject.Find("B-3-4").GetComponent<AudioSource>().Play();
             c_voicebed = 1;
         }
 
@@ -620,6 +647,7 @@ public class Hero : MonoBehaviour
             GameObject.Find("B-2-6").GetComponent<AudioSource>().Play();
             c_voiceimages = 1;
         }
+
 
         if (isBed && Input.GetKeyDown(KeyCode.X))
         {   
@@ -633,13 +661,22 @@ public class Hero : MonoBehaviour
             GameObject.Find("Bed new").GetComponent<SpriteRenderer>().enabled = true;
             itemsSprites.Add("Bed");
 
-            if (c_voicebed2 == 0)
+            if (c_voicebed2 == 0) 
             {
                 // Voice2 for bed add
                 GameObject.Find("B-1-7").GetComponent<AudioSource>().PlayDelayed(1f);
 
                 c_voicebed2 = 1;
             }
+
+            if (c_voicebed2 == 0 && day == 3)
+            {
+                // Voice2 for bed add
+                GameObject.Find("B-1-7").GetComponent<AudioSource>().PlayDelayed(1f);
+
+                c_voicebed2 = 1;
+            }
+
             // CHIT FOR DEVELOPER "INVENTAR"
             //items.Clear();
 
@@ -721,7 +758,7 @@ public class Hero : MonoBehaviour
         }
 
         // Voice for day1
-        if (day1Tasks < 9 && isItemDay1)
+        if (day1Tasks < 9 && isItemDay1 && Input.GetKeyDown(KeyCode.Z))
         {
             string itemHW = itemDay1.GetComponent<CollectableScript>().itemType;
 
@@ -737,7 +774,7 @@ public class Hero : MonoBehaviour
                 GameObject.Find("K-1-7").GetComponent<AudioSource>().PlayDelayed(12f);
             }
 
-            if (itemHW == "trcan" && c_voicetrcan == 0 && Input.GetKeyDown(KeyCode.Z))
+            if (itemHW == "trcan" && c_voicetrcan == 0)
             {   
                 c_voicetrcan = 1;
                 GameObject.Find("B-1-10").GetComponent<AudioSource>().Play();
@@ -765,7 +802,7 @@ public class Hero : MonoBehaviour
         }
 
         // Voices for day2
-        if (day2Tasks < 3 && isItemDay2)
+        if (day2Tasks < 3 && isItemDay2 && Input.GetKeyDown(KeyCode.Z))
         {
             string itemHW = itemDay2.GetComponent<CollectableScript>().itemType;
 
@@ -784,7 +821,7 @@ public class Hero : MonoBehaviour
         }
 
         // Voices for day3
-        if (day3Tasks < 6 && isItemDay3)
+        if (day3Tasks < 6 && isItemDay3 && Input.GetKeyDown(KeyCode.Z))
         {
             string itemHW = itemDay3.GetComponent<CollectableScript>().itemType;
 
@@ -811,10 +848,21 @@ public class Hero : MonoBehaviour
                 GameObject.Find("B-3-9").GetComponent<AudioSource>().Play();
             }
 
+            if (itemHW == "cactus" && c_voicecactus == 0)
+            {
+                c_voicecactus = 1;
+
+                GameObject.Find("B-3-1").GetComponent<AudioSource>().Play();
+                GameObject.Find("K-3-1").GetComponent<AudioSource>().PlayDelayed(3f);
+                GameObject.Find("B-3-2").GetComponent<AudioSource>().PlayDelayed(6f);
+                GameObject.Find("K-3-2").GetComponent<AudioSource>().PlayDelayed(9f);
+                GameObject.Find("B-3-3").GetComponent<AudioSource>().PlayDelayed(14f);
+            }
+
         }
 
         // Voices for day4
-        if (day4Tasks < 5 && isItemDay4)
+        if (day4Tasks < 5 && isItemDay4 && Input.GetKeyDown(KeyCode.Z))
         {
             string itemHW = itemDay4.GetComponent<CollectableScript>().itemType;
 
@@ -843,7 +891,7 @@ public class Hero : MonoBehaviour
         }
 
         // Voices for day5
-        if (day5Tasks < 3 && isItemDay5)
+        if (day5Tasks < 3 && isItemDay5 && Input.GetKeyDown(KeyCode.Z))
         {
             string itemHW = itemDay5.GetComponent<CollectableScript>().itemType;
 
@@ -870,8 +918,20 @@ public class Hero : MonoBehaviour
 
         }
 
+        if (isItemDay5 && Input.GetKeyDown(KeyCode.Z))
+        {
+            string itemHW = itemDay5.GetComponent<CollectableScript>().itemType;
+            
+            if (itemHW == "matches" && c_voicematches == 0)
+                {
+                    c_voicematches = 1;
+
+                    GameObject.Find("K-6-6").GetComponent<AudioSource>().Play();
+                }
+        }
+
         // Voices for day6
-        if (day6Tasks < 7 && isItemDay6)
+        if (day6Tasks < 7 && isItemDay6 && Input.GetKeyDown(KeyCode.Z))
         {
             string itemHW = itemDay6.GetComponent<CollectableScript>().itemType;
 
