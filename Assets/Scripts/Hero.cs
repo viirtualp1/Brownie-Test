@@ -572,10 +572,12 @@ public class Hero : MonoBehaviour
         }
 
         isCanBoobaSleep = checkCompleteTasks();
+        Debug.Log(isCanBoobaSleep);
 
         // Буба ложится спать на свою кровать
         if (isCanBoobaSleep && isBadBooba && Input.GetKeyDown(KeyCode.X))
         {   
+            // GameObject.Find("K-" + day + "-S").GetComponent<AudioSource>().Play();
 
             // Voices for Буба ложится спать
             if (day == 1)

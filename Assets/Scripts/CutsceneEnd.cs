@@ -22,13 +22,13 @@ public class CutsceneEnd : MonoBehaviour
         rgb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
     }
-    
+
     private async void Update()
     {
         if (rgb.transform.position.x < point_end.position.x)
         {
             State = States.run;
-            rgb.velocity = new Vector2(speed_Booba, rgb.velocity.y);   
+            rgb.velocity = new Vector2(speed_Booba, rgb.velocity.y);
         }
         else
         {
@@ -38,5 +38,8 @@ public class CutsceneEnd : MonoBehaviour
 
             SceneManager.LoadScene("TheEnd");
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            SceneManager.LoadScene("TheEnd");
     }
 }

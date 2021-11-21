@@ -53,6 +53,9 @@ public class CutsceneStart : MonoBehaviour
 
             SceneManager.LoadScene("BedRoomScene");
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            SceneManager.LoadScene("BedRoomScene");
     }
 }
 
