@@ -12,16 +12,20 @@ public class CutsceneStart : MonoBehaviour
     public Transform booba;
     public CinemachineVirtualCamera vcam;
 
+    private int SQ = 0;
+
     private StatesLeather State
     {
         get { return (StatesLeather)anim.GetInteger("State"); }
         set { anim.SetInteger("State", (int)value); }
+        
     }
 
     private void Awake()
     {
         rgb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
+        GameObject.Find("Day-Start").GetComponent<AudioSource>().Play();
     }
     
     private async void Update()
@@ -29,15 +33,23 @@ public class CutsceneStart : MonoBehaviour
         if (rgb.transform.position.x < point_end.position.x)
         {
             State = StatesLeather.run;
-            rgb.velocity = new Vector2(speed_leather, rgb.velocity.y);   
+            rgb.velocity = new Vector2(speed_leather, rgb.velocity.y);
         }
         else
         {
             vcam.Follow = booba;
             Destroy(GameObject.Find("Leather"));
+
+            // Subsequence (voice) Start
+            if (SQ == 0)
+            {
+                GameObject.Find("SubseQuence").GetComponent<AudioSource>().Play();
+                SQ = 1;
+            }
+
             GameObject.Find("booba-sprite").GetComponent<SpriteRenderer>().enabled = true;
 
-            await Task.Delay(1000);
+            await Task.Delay(28000);
 
             SceneManager.LoadScene("BedRoomScene");
         }

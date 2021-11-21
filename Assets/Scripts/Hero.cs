@@ -88,8 +88,13 @@ public class Hero : MonoBehaviour
     private bool isLightOff = false;
     private bool isLightTrigger = false;
 
-    private int c_voicetrns1 = 0;
+    private int c_voicetrns2 = 0;
 
+    private int c_voiceclock1 = 0;
+    private int c_voiceclock2 = 0;
+
+    private int c_voiceclock3_sp = 0;
+    
     private int c_voicebaika = 0;
     private int c_voicetrcan = 0;
     private int c_voicebed = 0;
@@ -102,6 +107,26 @@ public class Hero : MonoBehaviour
     private int c_voicesock1 = 0;
     //private int c_voicesocks2 = 0;
     private int c_voiceumbrella = 0;
+
+    private int c_voicewheel = 0;
+    private int c_voiceimages = 0;
+    private int c_voicepain = 0;
+
+    private int c_voicefermas1 = 0;
+    private int c_voicefermas2 = 0;
+    private int c_voiceprovod = 0;
+    private int c_chitok = 0;
+
+    private int c_voicerazor = 0;
+    private int c_voicesleeve = 0;
+    private int c_voicefishRod = 0;
+
+    private int c_voiceegg = 0;
+    private int c_voicesink = 0;
+    private int c_voicechol = 0;
+
+    private int c_voiceflowers = 0;
+    private int c_voiceplush = 0;
 
     // public Sprite bedNew;
     private bool isBed;
@@ -168,6 +193,11 @@ public class Hero : MonoBehaviour
     // Методы
     void Start()
     {
+
+        // Var for voices scenes
+        //PlayerPrefs.SetInt("c_voiceclock1", 0);
+        //PlayerPrefs.Save();
+
         getSaves();
 
         // CHIT FOR DEVELOPER DAY
@@ -252,7 +282,7 @@ public class Hero : MonoBehaviour
  
         // BG Music 6 day for homes not BedRoomScene and HomeBooba
  
-        if (SceneManager.GetActiveScene().name != "BedRoomScene" && SceneManager.GetActiveScene().name != "HomeBooba")
+        if (SceneManager.GetActiveScene().name != "BedRoomScene" && SceneManager.GetActiveScene().name != "HomeBooba" && day < 7)
         {
             Debug.Log(day);
             GameObject.Find("Day " + day + " BG").GetComponent<AudioSource>().Play();
@@ -301,7 +331,8 @@ public class Hero : MonoBehaviour
     }
 
     private void Update()
-    {
+    {   
+
         // Если Буба стоит на земле => анимация idle
         if (isGrounded) State = States.idle;
         if (!isLoot && Input.GetKeyDown(KeyCode.X)) animationLoot();
@@ -368,16 +399,17 @@ public class Hero : MonoBehaviour
             string nextRoom = room.gameObject.GetComponent<GoToDoor>().nextRoom;
 
             // Voices for translate
-            if (nextRoom == "HallwayLargeRoom" && c_voicetrns1 == 0)
+            // && c_voicetrns1 == 0
+            if (nextRoom == "HallwayLargeRoom")
             {
-                try
-                {
-                    GameObject.Find("K-1-8").GetComponent<AudioSource>().Play();
-                }
-                catch
-                {
-                    Debug.Log("huy");
-                }
+                //try
+                //{
+                    //GameObject.Find("K-1-8").GetComponent<AudioSource>().Play();
+                //}
+                //catch
+                //{
+                    //Debug.Log("huy");
+                //}
                 //yield return new WaitForSeconds(0.5f);
                 SceneManager.LoadScene(nextRoom);
             } else 
@@ -393,6 +425,108 @@ public class Hero : MonoBehaviour
             // SceneManager.LoadScene("Menu");
         // }
 
+        // Voices for translate and headband scenes
+        if(SceneManager.GetActiveScene().name == "HallwayLargeRoom" && day == 1 && !PlayerPrefs.HasKey("c_voicetrns1"))
+        {   
+            PlayerPrefs.SetInt("c_voicetrns1", 1);
+
+            GameObject.Find("K-1-8").GetComponent<AudioSource>().Play();
+            //c_voicetrns1 = 1;
+        }
+
+        if(SceneManager.GetActiveScene().name == "HomeBooba" && c_voicetrns2 == 0 && day < 3)
+        {
+            GameObject.Find("B-2-11").GetComponent<AudioSource>().Play();
+            c_voicetrns2 = 1;
+        }
+
+        if(SceneManager.GetActiveScene().name == "HomeBooba" && c_voicetrns2 == 0 && day == 3)
+        {
+            GameObject.Find("B-3-12").GetComponent<AudioSource>().Play();
+            c_voicetrns2 = 1;
+        }
+
+
+        if(SceneManager.GetActiveScene().name == "BedRoomScene" && day == 2 && !PlayerPrefs.HasKey("c_voicetrns3"))
+        {   
+            PlayerPrefs.SetInt("c_voicetrns3", 1);
+
+            GameObject.Find("B-2-1").GetComponent<AudioSource>().Play();
+            GameObject.Find("K-2-1").GetComponent<AudioSource>().PlayDelayed(3.5f);
+            //c_voicetrns3 = 1;
+        }
+
+        if(SceneManager.GetActiveScene().name == "LivingRoom" && day == 2 && !PlayerPrefs.HasKey("c_voicetrns4"))
+        {
+            PlayerPrefs.SetInt("c_voicetrns4", 1);
+            //PlayerPrefs.Save();
+
+            GameObject.Find("K-2-2").GetComponent<AudioSource>().Play();
+            //c_voicetrns4 = 1;
+        }
+
+
+        if(SceneManager.GetActiveScene().name == "Garage" && day == 3 && !PlayerPrefs.HasKey("c_voicetrns5"))
+        {
+            PlayerPrefs.SetInt("c_voicetrns5", 1);
+
+            GameObject.Find("K-3-4").GetComponent<AudioSource>().Play();
+        }
+
+
+        if(SceneManager.GetActiveScene().name == "BathRoom" && day == 4 && !PlayerPrefs.HasKey("c_voicetrns6"))
+        {   
+            PlayerPrefs.SetInt("c_voicetrns6", 1);
+
+            GameObject.Find("B-4-3").GetComponent<AudioSource>().Play();
+            //c_voicetrns3 = 1;
+        }
+
+        if(SceneManager.GetActiveScene().name == "BedRoomScene" && day == 4 && !PlayerPrefs.HasKey("c_voicetrns7"))
+        {   
+            PlayerPrefs.SetInt("c_voicetrns7", 1);
+
+            GameObject.Find("K-4-1").GetComponent<AudioSource>().Play();
+            GameObject.Find("B-4-1").GetComponent<AudioSource>().PlayDelayed(3.5f);
+            GameObject.Find("K-4-2").GetComponent<AudioSource>().PlayDelayed(6.5f);
+            //c_voicetrns3 = 1;
+        }
+
+
+        if(SceneManager.GetActiveScene().name == "Kitchen" && day == 5 && !PlayerPrefs.HasKey("c_voicetrns8"))
+        {   
+            PlayerPrefs.SetInt("c_voicetrns8", 1);
+
+            GameObject.Find("K-5-1").GetComponent<AudioSource>().Play();
+            //c_voicetrns3 = 1;
+        }
+
+
+        if(SceneManager.GetActiveScene().name == "BedRoomScene" && day == 6 && !PlayerPrefs.HasKey("c_voicetrns9"))
+        {   
+            PlayerPrefs.SetInt("c_voicetrns9", 1);
+
+            GameObject.Find("B-6-1").GetComponent<AudioSource>().Play();
+            GameObject.Find("K-6-1").GetComponent<AudioSource>().PlayDelayed(3f);
+            //c_voicetrns3 = 1;
+        }
+
+        // Special voice finale day 6
+        if(SceneManager.GetActiveScene().name == "roofScene" && day == 6){
+
+            currentTaskString = PlayerPrefs.GetString("currentTaskString");
+            //Debug.Log(PlayerPrefs.GetInt("c_voiceclock1"));
+
+            if (currentTaskString == "Идти спать" && c_voiceclock3_sp == 0)
+            {
+                GameObject.Find("B-6-6").GetComponent<AudioSource>().PlayDelayed(2.5f);
+                GameObject.Find("K-6-3").GetComponent<AudioSource>().PlayDelayed(5f);
+                GameObject.Find("K-6-4").GetComponent<AudioSource>().PlayDelayed(8f);
+                c_voiceclock3_sp = 1;
+            }
+        }
+
+
         // Вход в домик Бубы
         if (isDoorBooba && Input.GetKeyDown(KeyCode.X))
             SceneManager.LoadScene("homeBooba");
@@ -405,13 +539,13 @@ public class Hero : MonoBehaviour
             AudioClip TVAudioSound = RC.gameObject.GetComponent<anySound>().sound;
             
             // Voice for tv1
-            if (c_voicetel1 == 0)
-            {
-                GameObject.Find("B-1-11").GetComponent<AudioSource>().Play();
-                GameObject.Find("K-1-9").GetComponent<AudioSource>().PlayDelayed(3f);
+            //if (c_voicetel1 == 0)
+            //{
+                //GameObject.Find("B-1-11").GetComponent<AudioSource>().Play();
+                //GameObject.Find("K-1-9").GetComponent<AudioSource>().PlayDelayed(3f);
 
-                c_voicetel1 = 1;
-            }
+                //c_voicetel1 = 1;
+            //}
 
 
             TV.GetComponent<SpriteRenderer>().sprite = RC.gameObject.GetComponent<LargeRoom>().TVOn;
@@ -426,12 +560,12 @@ public class Hero : MonoBehaviour
             AudioClip TVAudioSound = RC.gameObject.GetComponent<anySound>().sound;
 
             // Voice for tv2
-            if (c_voicetel2 == 0)
-            {
-                GameObject.Find("B-1-12").GetComponent<AudioSource>().Play();
+            //if (c_voicetel2 == 0)
+            //{
+                //GameObject.Find("B-1-12").GetComponent<AudioSource>().Play();
 
-                c_voicetel2 = 1;
-            }
+                //c_voicetel2 = 1;
+            //}
 
             TV.GetComponent<SpriteRenderer>().sprite = RC.gameObject.GetComponent<LargeRoom>().TVOff;
             RC.GetComponent<AudioSource>().clip = TVAudioSound;
@@ -444,7 +578,27 @@ public class Hero : MonoBehaviour
 
         // Буба ложится спать на свою кровать
         if (isCanBoobaSleep && isBadBooba && Input.GetKeyDown(KeyCode.X))
-        {
+        {   
+
+            // Voices for Буба ложится спать
+            if (day == 1)
+                GameObject.Find("K-1-S").GetComponent<AudioSource>().Play();
+
+            if (day == 2)
+                GameObject.Find("K-2-S").GetComponent<AudioSource>().Play();
+
+            if (day == 3)
+                GameObject.Find("K-3-S").GetComponent<AudioSource>().Play();
+            
+            if (day == 4)
+                GameObject.Find("K-4-S").GetComponent<AudioSource>().Play();
+
+            if (day == 5)
+                GameObject.Find("K-5-S").GetComponent<AudioSource>().Play();
+
+            if (day == 6)
+                GameObject.Find("K-6-S").GetComponent<AudioSource>().Play();
+
             newDay();
 
             scriptHomeBooba.BoobaSleep();
@@ -471,6 +625,13 @@ public class Hero : MonoBehaviour
         {
             GameObject.Find("B-1-6").GetComponent<AudioSource>().Play();
             c_voicebed = 1;
+        }
+
+        // Voice for images coll
+        if (isImages && c_voiceimages == 0)
+        {
+            GameObject.Find("B-2-6").GetComponent<AudioSource>().Play();
+            c_voiceimages = 1;
         }
 
         if (isBed && Input.GetKeyDown(KeyCode.X))
@@ -520,6 +681,13 @@ public class Hero : MonoBehaviour
         if (isLightTrigger && Input.GetKeyDown(KeyCode.X))
         {
             isLightOff = true;
+
+            // Voice for chitok
+            if (c_chitok == 0){
+                GameObject.Find("B-3-11").GetComponent<AudioSource>().Play();
+                c_chitok = 1;
+            }
+
             GameObject.Find("Shitok1").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<Garage>().new_light;
             itemsSprites.Add("new_light");
             day3Tasks++;
@@ -528,7 +696,35 @@ public class Hero : MonoBehaviour
             saveCountersTasks();
         }
         
-        // Voices for items coll
+        // Voices and BG_Music for items coll
+        if(SceneManager.GetActiveScene().name != "HomeBooba"){
+
+            currentTaskString = PlayerPrefs.GetString("currentTaskString");
+            //Debug.Log(PlayerPrefs.GetInt("c_voiceclock1"));
+
+            // && !PlayerPrefs.HasKey("c_voiceclock1")
+            if (currentTaskString == "Идти спать")
+            {
+
+                if (c_voiceclock1 == 0 && day != 6)
+                {
+                    GameObject.Find("K-1-11").GetComponent<AudioSource>().PlayDelayed(2.5f);
+                    c_voiceclock1 = 1;
+                }
+
+            // Variable!
+                //PlayerPrefs.SetInt("c_voiceclock1", 1);
+                //PlayerPrefs.Save();
+            }
+
+            if (currentTaskString == "Идти спать" && c_voiceclock2 == 0)
+            {
+                GameObject.Find("Day " + day + " BG").GetComponent<AudioSource>().Stop();
+                GameObject.Find("Day-" + day + "-clock-loop").GetComponent<AudioSource>().Play();
+
+                 c_voiceclock2 = 1;
+            }
+        }
 
         // Voice for day1
         if (day1Tasks < 9 && isItemDay1)
@@ -547,7 +743,7 @@ public class Hero : MonoBehaviour
                 GameObject.Find("K-1-7").GetComponent<AudioSource>().PlayDelayed(12f);
             }
 
-            if (itemHW == "trcan" && c_voicetrcan == 0)
+            if (itemHW == "trcan" && c_voicetrcan == 0 && Input.GetKeyDown(KeyCode.Z))
             {   
                 c_voicetrcan = 1;
                 GameObject.Find("B-1-10").GetComponent<AudioSource>().Play();
@@ -574,6 +770,135 @@ public class Hero : MonoBehaviour
 
         }
 
+        // Voices for day2
+        if (day2Tasks < 3 && isItemDay2)
+        {
+            string itemHW = itemDay2.GetComponent<CollectableScript>().itemType;
+
+            if (itemHW == "wheel" && c_voicewheel == 0 && Input.GetKeyDown(KeyCode.Z))
+            {   
+                c_voicewheel = 1;
+                GameObject.Find("B-2-5").GetComponent<AudioSource>().Play();
+            }
+
+            if (itemHW == "краски" && c_voicepain == 0)
+            {   
+                c_voicepain = 1;
+                GameObject.Find("B-2-9").GetComponent<AudioSource>().Play();
+                GameObject.Find("K-2-4").GetComponent<AudioSource>().PlayDelayed(3f);
+            }
+
+        }
+
+        // Voices for day3
+        if (day3Tasks < 6 && isItemDay3)
+        {
+            string itemHW = itemDay3.GetComponent<CollectableScript>().itemType;
+
+            if (itemHW == "Fermas" && c_voicefermas1 == 0)
+            {
+                c_voicefermas1 = 1;
+
+                GameObject.Find("B-3-7").GetComponent<AudioSource>().Play();
+                GameObject.Find("B-3-8").GetComponent<AudioSource>().PlayDelayed(3f);
+                GameObject.Find("K-3-5").GetComponent<AudioSource>().PlayDelayed(6f);
+            }
+
+            if (itemHW == "Fermas" && isTakeInstuments && c_voicefermas2 == 0)
+            {
+                c_voicefermas2 = 1;
+
+                GameObject.Find("B-3-10").GetComponent<AudioSource>().Play();
+            }
+
+            if (itemHW == "provod5" && c_voiceprovod == 0)
+            {
+                c_voiceprovod = 1;
+
+                GameObject.Find("B-3-9").GetComponent<AudioSource>().Play();
+            }
+
+        }
+
+        // Voices for day4
+        if (day4Tasks < 5 && isItemDay4)
+        {
+            string itemHW = itemDay4.GetComponent<CollectableScript>().itemType;
+
+            if (itemHW == "razor" && c_voicerazor == 0)
+            {
+                c_voicerazor = 1;
+
+                GameObject.Find("B-4-4").GetComponent<AudioSource>().Play();
+                GameObject.Find("K-4-3").GetComponent<AudioSource>().PlayDelayed(3f);
+            }
+
+            if (itemHW == "sleeve" && c_voicesleeve == 0)
+            {
+                c_voicesleeve = 1;
+
+                GameObject.Find("B-4-5").GetComponent<AudioSource>().Play();
+            }
+
+            if (itemHW == "fishRod" && c_voicefishRod == 0)
+            {
+                c_voicefishRod = 1;
+
+                GameObject.Find("B-4-9").GetComponent<AudioSource>().Play();
+            }
+
+        }
+
+        // Voices for day5
+        if (day5Tasks < 3 && isItemDay5)
+        {
+            string itemHW = itemDay5.GetComponent<CollectableScript>().itemType;
+
+            if (itemHW == "egg" && c_voiceegg == 0 && Input.GetKeyDown(KeyCode.X))
+            {
+                c_voiceegg = 1;
+
+                GameObject.Find("B-5-1").GetComponent<AudioSource>().Play();
+            }
+
+            if (itemHW == "sink" && c_voicesink == 0)
+            {
+                c_voicesink = 1;
+
+                GameObject.Find("B-5-4").GetComponent<AudioSource>().Play();
+            }
+
+            if (itemHW == "chol" && c_voicechol == 0)
+            {
+                c_voicechol = 1;
+
+                GameObject.Find("B-5-6").GetComponent<AudioSource>().Play();
+            }
+
+        }
+
+        // Voices for day6
+        if (day6Tasks < 7 && isItemDay6)
+        {
+            string itemHW = itemDay6.GetComponent<CollectableScript>().itemType;
+
+            if (itemHW == "flowers" && c_voiceflowers == 0)
+            {
+                c_voiceflowers = 1;
+
+                GameObject.Find("B-6-2").GetComponent<AudioSource>().Play();
+            }
+
+            if (itemHW == "plush" && c_voiceplush == 0)
+            {
+                c_voiceplush = 1;
+
+                GameObject.Find("B-6-4").GetComponent<AudioSource>().Play();
+                GameObject.Find("K-6-2").GetComponent<AudioSource>().PlayDelayed(3f);
+            }
+        }
+
+
         if (day1Tasks < 9 && isItemDay1 && Input.GetKeyDown(KeyCode.X))
         {
             string itemHW = itemDay1.GetComponent<CollectableScript>().itemType;
@@ -599,6 +924,13 @@ public class Hero : MonoBehaviour
         } else if (day2Tasks < 3 && isItemDay2 && Input.GetKeyDown(KeyCode.X))
         {
             string itemHW = itemDay2.GetComponent<CollectableScript>().itemType;
+
+            // Voice pain add
+            if (itemHW == "краски")
+            {
+                GameObject.Find("B-2-10").GetComponent<AudioSource>().Play();
+            }
+
             items.Add(itemHW);
             saveItems();
 
@@ -632,6 +964,10 @@ public class Hero : MonoBehaviour
         {
             string itemHW = itemDay4.GetComponent<CollectableScript>().itemType;
 
+            // Voice sleeve  add
+            if (itemHW == "sleeve")
+                GameObject.Find("B-4-6").GetComponent<AudioSource>().Play();
+
             if (itemHW == "Mirror")
             {
                 GameObject.Find("Mirror").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<BathRoom>().new_Mirror;
@@ -642,6 +978,7 @@ public class Hero : MonoBehaviour
                 saveItems();
             } else if (itemHW == "fishRod")
             {
+                GameObject.Find("B-4-10").GetComponent<AudioSource>().Play();
                 GameObject.Find("angler").GetComponent<SpriteRenderer>().enabled = true;
                 day4Tasks++;
 
@@ -680,10 +1017,15 @@ public class Hero : MonoBehaviour
         {
             string itemHW = itemDay6.GetComponent<CollectableScript>().itemType;
 
+
             if (itemHW == "plush" && isTakeScissors && isTakeDichlorvos)
             {
                 GameObject.Find("plush").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<roof>().new_plush;
                 itemsSprites.Add("new_plush");
+
+                // Voice plush  add
+                GameObject.Find("B-6-5").GetComponent<AudioSource>().Play();
+
                 day6Tasks++;
 
                 saveCountersTasks();
@@ -692,6 +1034,9 @@ public class Hero : MonoBehaviour
             {
                 GameObject.Find("flowers").GetComponent<SpriteRenderer>().sprite = GameObject.Find("Script").GetComponent<roof>().new_flowers;
                 itemsSprites.Add("new_flowers");
+
+                // Voice flowers  add
+                GameObject.Find("B-6-3").GetComponent<AudioSource>().Play();
 
                 day6Tasks++;
 
