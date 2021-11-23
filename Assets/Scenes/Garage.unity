@@ -3465,7 +3465,11 @@ PrefabInstance:
     - target: {fileID: 735569891497248825, guid: 7c278d888b6178b40a977b952ae9a770, type: 3}
       propertyPath: menuUI
       value: 
+<<<<<<< Updated upstream
       objectReference: {fileID: 1236234661}
+=======
+      objectReference: {fileID: 1644254541}
+>>>>>>> Stashed changes
     - target: {fileID: 766489493989466630, guid: 7c278d888b6178b40a977b952ae9a770, type: 3}
       propertyPath: m_Name
       value: MenuScript
@@ -8723,6 +8727,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1644254541 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7208281316839120420, guid: 0a3d1dce7546af94f81c91cbb40fb366, type: 3}
+  m_PrefabInstance: {fileID: 13833327}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1647819653
 GameObject:
   m_ObjectHideFlags: 0
