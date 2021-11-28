@@ -26,7 +26,7 @@ public class Hero : MonoBehaviour
     // Ссылки
     private Rigidbody2D rb;
     public SpriteRenderer sprite;
-
+    
     public static Hero Instance { get; set; }
 
     // Получаем коллайдер предмета (который хочет подобрать игрок)
