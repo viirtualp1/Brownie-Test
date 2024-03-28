@@ -26,7 +26,7 @@ public class Hero : MonoBehaviour
     // Ссылки
     private Rigidbody2D rb;
     public SpriteRenderer sprite;
-
+    
     public static Hero Instance { get; set; }
 
     // Получаем коллайдер предмета (который хочет подобрать игрок)
@@ -328,18 +328,21 @@ public class Hero : MonoBehaviour
 
     private async void animationLoot()
     {
-        isGrounded = false;
-        isBoobaCanJump = false;
-        isBoobaCanMove = false;
-        isLoot = true;
-        State = States.loot;
+        if (!isBadBooba)
+        {
+            isGrounded = false;
+            isBoobaCanJump = false;
+            isBoobaCanMove = false;
+            isLoot = true;
+            State = States.loot;
 
-        await Task.Delay(900);
+            await Task.Delay(900);
 
-        isGrounded = true;
-        isBoobaCanJump = true;
-        isBoobaCanMove = true;
-        isLoot = false;
+            isGrounded = true;
+            isBoobaCanJump = true;
+            isBoobaCanMove = true;
+            isLoot = false;   
+        }
     }
 
     private void Update()
@@ -718,8 +721,11 @@ public class Hero : MonoBehaviour
                 c_chitok = 1;
             }
 
-            GameObject.Find("Shitok1").SetActive(false);
-            GameObject.Find("Shitok1 new").GetComponent<SpriteRenderer>().enabled = true;
+            try
+            {
+                GameObject.Find("Shitok1").SetActive(false);
+                GameObject.Find("Shitok1 new").GetComponent<SpriteRenderer>().enabled = true;   
+            } catch {}
             itemsSprites.Add("Shitok1");
             day3Tasks++;
 
@@ -1146,6 +1152,9 @@ public class Hero : MonoBehaviour
                 saveCountersTasks();
             }
         }
+
+        if (day != 6 && SceneManager.GetActiveScene().name == "Kitchen")
+            GameObject.Find("matches").SetActive(false);
         
         if (day1Tasks >= 9 && day == 1) saveAndUpdateCurrentTask("Идти спать");
         if (day2Tasks >= 3 && day == 2) saveAndUpdateCurrentTask("Идти спать");
@@ -1154,7 +1163,6 @@ public class Hero : MonoBehaviour
         if (day5Tasks >= 3 && day == 5) saveAndUpdateCurrentTask("Идти спать");
         if (day6Tasks >= 6 && day == 6) saveAndUpdateCurrentTask("Идти спать");
         if (day == 7) SceneManager.LoadScene("CutsceneEnd");
-        // if (day6Tasks >= 7 && day == 3) saveAndUpdateCurrentTask("Идти спать");
     }
 
     private bool checkCompleteTasks()

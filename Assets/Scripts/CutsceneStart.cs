@@ -21,7 +21,7 @@ public class CutsceneStart : MonoBehaviour
         
     }
 
-    private void Awake()
+    private void Start()
     {
         rgb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
@@ -30,6 +30,9 @@ public class CutsceneStart : MonoBehaviour
     
     private async void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+            SceneManager.LoadScene("BedRoomScene");
+        
         if (rgb.transform.position.x < point_end.position.x)
         {
             State = StatesLeather.run;
@@ -53,9 +56,6 @@ public class CutsceneStart : MonoBehaviour
 
             SceneManager.LoadScene("BedRoomScene");
         }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-            SceneManager.LoadScene("BedRoomScene");
     }
 }
 
